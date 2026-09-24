@@ -1,7 +1,7 @@
 # CT6 Energy Monitor PCB (v0.1): ESP32-S3 DevKit + 6 CT + ZMPT101B
 
 KiCad 10 project: [`kicad/ct6-energy-monitor.kicad_pro`](kicad/ct6-energy-monitor.kicad_pro)
-Schematic PDF: [`renders/schematic.pdf`](renders/schematic.pdf) · 3D top view: [`renders/pcb_top.png`](renders/pcb_top.png) · BOM: [`bom.csv`](bom.csv)
+**Full circuit diagram (every R/C/jumper/GPIO): [`renders/pcb_full_connection.svg`](renders/pcb_full_connection.svg)** · Schematic PDF: [`renders/schematic.pdf`](renders/schematic.pdf) · 3D top view: [`renders/pcb_top.png`](renders/pcb_top.png) · BOM: [`bom.csv`](bom.csv)
 
 > **Status: v0.1 fully routed. Not yet built or tested; do the breadboard test and the checklist below first.**
 > ERC: 0 violations · DRC: 0 errors, **0 unconnected**, 0 creepage/clearance · schematic-to-PCB parity: 0 issues.
