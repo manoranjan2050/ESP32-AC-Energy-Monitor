@@ -1,18 +1,226 @@
-# ESP32 AC Energy Monitor: Stage 1 (single SCT-013-000 signal test)
+# ESP32-S3 AC Energy Monitor (6 CT + voltage), ESPHome / Home Assistant
 
-> **⚠ This is test and calibration firmware, not a certified energy meter.**
-> It checks that the CT signal reaches the ESP32 correctly. The "estimated
-> current" entities are a theoretical conversion that is off by default. The
-> ESP32 ADC is noisy and non-linear, so don't use these numbers for billing
-> or protection.
+An open-source, DIY mains energy monitor built on an **ESP32-S3 DevKit**:
+- up to **6 SCT-013 current transformers (CTs)**, each channel works with **100A/50mA** or **30A/1V** CTs
+- one **ZMPT101B** voltage sensor
+- **ESPHome** firmware, visible in **Home Assistant**
 
-- Board: **ESP32-S3** (QFN56 rev v0.2, 16 MB flash, 8 MB PSRAM, native USB), detected on COM5
-- ESPHome: **2026.8.2**, esp-idf framework
-- Firmware: [`esphome/energy_monitor_test.yaml`](esphome/energy_monitor_test.yaml)
-- Wiring detail: [`docs/wiring.md`](docs/wiring.md)
-- **Custom PCB (6 CT + ZMPT101B, KiCad):** [`hardware/README.md`](hardware/README.md)
+> **⚠ Not a certified energy meter.** The ESP32 ADC is noisy and non-linear. Don't use this for
+> billing or protection. The board has a **230 V section**, so build and test it only if you're
+> competent with mains wiring.
 
 ---
+
+## Project status (2026-09-24)
+
+| Part | Status |
+|---|---|
+| Stage-1 test firmware (1 CT, true RMS, calibration in HA) | ✅ Working (`esphome/energy_monitor_test.yaml`) |
+| CT input circuit (bias + 1k/1.8k + 104 + burden) | ✅ **Proven on a breadboard** with both CT types (results below) |
+| Custom PCB v0.1 (KiCad): 6 CT + on-board ZMPT101B | ✅ Designed and **fully routed**. ERC 0, DRC 0 errors, schematic ↔ PCB parity 0. **Not built yet** |
+| On-board ZMPT101B + MCP6002 voltage stage | ⚠ Designed, **not tested yet** |
+| 6-channel + voltage firmware (real power, PF, kWh) | ⏳ Next step (after the PCB) |
+
+### Breadboard test results (CT channel = same values as the PCB)
+
+| CT | Load | Reading | Notes |
+|---|---|---|---|
+| 30A/1V | CT unclamped | ~0.08 A | Noise floor |
+| 30A/1V | Light + fan | **0.33 A** | ≈ 75 W |
+| 30A/1V | Water heater | **12.66 A** | Clean sine (pp/rms 2.86), no clipping |
+| 100A/50mA + 24 Ω burden | Induction cooker | **4.6 A** | Stable, no clipping |
+
+---
+
+## Repository map
+
+```
+esphome/
+  energy_monitor_test.yaml      Stage-1 test firmware (1 CT on GPIO1)
+  secrets.example.yaml          Copy to secrets.yaml (git-ignored) and fill in Wi-Fi/keys
+docs/wiring.md                  Stage-1 breadboard wiring checks
+hardware/
+  README.md                     PCB design notes, calculations, before-ordering checklist
+  kicad/                        KiCad 10 project (schematic + routed PCB + ZMPT101B footprint + DRC rules)
+  fab/                          Manufacturing files: Gerbers zip, BOM, pick-and-place, KiCad zip
+  renders/                      Diagrams (SVG), PCB images, schematic PDF
+  generate_kicad.py             Builds schematic + PCB from ONE netlist (source of truth)
+  route_pcb.py                  Hand-routes mains, autoroutes the rest with Freerouting
+  make_*_svg.py                 Regenerate the SVG diagrams from the same netlist
+```
+
+---
+
+## Files you'll use
+
+### KiCad (schematic + PCB)
+
+| File | What it is |
+|---|---|
+| [`hardware/kicad/ct6-energy-monitor.kicad_pro`](hardware/kicad/ct6-energy-monitor.kicad_pro) | **Open this in KiCad 10** (free, kicad.org). The schematic and PCB open together |
+| [`hardware/kicad/ct6-energy-monitor.kicad_sch`](hardware/kicad/ct6-energy-monitor.kicad_sch) | Schematic: 81 parts, 42 nets |
+| [`hardware/kicad/ct6-energy-monitor.kicad_pcb`](hardware/kicad/ct6-energy-monitor.kicad_pcb) | Routed 2-layer PCB, 120 × 90 mm |
+| [`hardware/fab/ct6-kicad-project.zip`](hardware/fab/ct6-kicad-project.zip) | The whole KiCad project in one zip |
+| [`hardware/renders/schematic.pdf`](hardware/renders/schematic.pdf) | Schematic as a PDF, for viewing and printing |
+
+### EasyEDA
+
+- **EasyEDA Pro:** *File → Import → KiCad*, then pick `ct6-energy-monitor.kicad_pro` or `ct6-kicad-project.zip`.
+  The files are **KiCad 10 format**, and EasyEDA's importer may only accept older KiCad versions (**not tested**).
+- **EasyEDA Standard:** only imports old KiCad 5 files, so it won't work.
+- **If the import fails**, you have three options:
+  1. **Order straight from the Gerbers** (below). The board is already routed, so no EasyEDA is needed.
+  2. **Redraw in EasyEDA** using [`easyeda_connection_guide.svg`](hardware/renders/easyeda_connection_guide.svg).
+     It shows every part, every pin and its net name. Place the parts, put a **Net Label** with the exact
+     name on each pin, then check the nets against the list in section 7 of that SVG.
+  3. Ask for a **KiCad 6-format copy** of the schematic, which EasyEDA Pro is more likely to accept.
+
+### Ordering (JLCPCB)
+
+| File | Use |
+|---|---|
+| [`hardware/fab/ct6-gerbers-jlcpcb.zip`](hardware/fab/ct6-gerbers-jlcpcb.zip) | Upload as-is: Gerbers + drill, 2 layers |
+| [`hardware/fab/ct6-bom.csv`](hardware/fab/ct6-bom.csv) | Bill of materials |
+| [`hardware/fab/ct6-cpl.csv`](hardware/fab/ct6-cpl.csv) | Pick-and-place, origin = bottom-left board corner |
+
+### Diagrams (SVG, open in any browser)
+
+| Diagram | Shows |
+|---|---|
+| [`pcb_full_connection.svg`](hardware/renders/pcb_full_connection.svg) | **The complete PCB circuit**: every R, C, diode, jumper, op-amp pin and GPIO |
+| [`easyeda_connection_guide.svg`](hardware/renders/easyeda_connection_guide.svg) | Every part as a card: pin → net name. Use it for EasyEDA redraws and checks |
+| [`final_6ct_voltage_connection.svg`](hardware/renders/final_6ct_voltage_connection.svg) | Breadboard version: 6 CT + ready-made ZMPT101B module |
+| [`breadboard_connection.svg`](hardware/renders/breadboard_connection.svg) | Breadboard test of one CT channel (the proven circuit) |
+| [`pcb_top.png`](hardware/renders/pcb_top.png), [`pcb_copper.png`](hardware/renders/pcb_copper.png) | PCB 3D render and copper view |
+
+---
+
+## How the circuit works
+
+### GPIO map (ESP32-S3, ADC1 only)
+
+| Signal | GPIO | DevKit socket pin |
+|---|---|---|
+| CT1 | GPIO1 | J4-4 |
+| CT2 · CT3 · CT4 · CT5 | GPIO4 · 5 · 6 · 7 | J3-4 · 5 · 6 · 7 |
+| CT6 | GPIO8 | J3-12 |
+| Voltage (ZMPT101B) | GPIO9 | J3-15 |
+| Bias monitor | GPIO10 | J3-16 |
+| I²C OLED SDA / SCL | GPIO17 / GPIO18 | J3-10 / J3-11 |
+| 5V in / 3V3 / GND | — | J3-21 / J3-1,2 / J3-22, J4-1,21,22 |
+
+Avoid GPIO0/3/45/46 (strapping), GPIO35–37 (octal PSRAM on N16R8) and GPIO11–20 (ADC2, conflicts with Wi-Fi).
+**Measure your DevKit before ordering.** On the test board the silkscreen "4" was really GPIO1.
+
+### One CT channel (×6, identical)
+
+```
+CT sleeve ─────────────────────────────────────── VB (bias ≈ 1.5 V)
+CT tip ──┬── 1 kΩ ──┬── ADC node ──► GPIO
+         │          ├── 1.8 kΩ ──► VB
+       22 Ω         ├── 100 nF (104) ──► GND
+     (burden,       └── BAT54S clamp (to GND and +3V3A)
+   via jumper JP)
+```
+
+- **1 kΩ + 1.8 kΩ** scale the signal to **×0.643** around the bias. This gives headroom for 100 A, and the 1 kΩ limits current into the pin.
+- **100 nF** filters noise (~2.5 kHz).
+- **BAT54S** clamps the pin between 0 and 3.3 V. See "Diodes" below.
+
+### Jumpers JP11…JP16 (one per CT)
+
+| CT type | Shunt position | Burden | Home Assistant settings |
+|---|---|---|---|
+| **100A/50mA** (SCT-013-000) | **1-2 (mA), default** | IN | Burden **22** (or 24) · Secondary **0.05** · Primary **100** · Calibration **1.555** |
+| **30A/1V** (SCT-013-030) | **2-3 (V)** | OUT | Burden **1** · Secondary **1** · Primary **30** · Calibration **1.555** |
+
+- **1.555** undoes the ×0.643 divider. Fine-tune each channel: `Cal = 1.555 × (clamp-meter A ÷ reading A)`.
+- **A 1V CT with the shunt on mA** reads ~25 % of the true value. That's safe, just obviously wrong.
+- **⚠ A 100A CT with the shunt on V runs OPEN.** The reading clips to 0/4095 and can damage the CT or the pin. **Unclamp immediately.**
+- Ship boards with every shunt on **1-2**.
+
+### Diodes (D…)
+
+| Designator | Part | Job |
+|---|---|---|
+| **D1** | SS34 Schottky | Power input: reverse-polarity protection, and stops USB 5V back-feeding your 5V supply |
+| **D11 … D16** | BAT54S | ADC clamps for **CT1 … CT6** (D1**n** = CT**n**, so **D16 = CT6 → GPIO8**) |
+| **D41** | BAT54S | ADC clamp for the voltage channel (GPIO9) |
+
+A **BAT54S** is two Schottky diodes in series in one SOT-23:
+- **pin 1 = GND side**
+- **pin 2 = +3V3A side**
+- **pin 3 = ADC node**
+
+It does nothing while the signal is between 0 and 3.3 V. If a fault pushes the pin outside that range (for example a CT without its burden), it clamps the pin. The 1 kΩ in front limits the current. The clamps were optional on the breadboard; **fit them on the PCB.**
+
+### Parts naming (per CT channel n = 1…6)
+
+`J1n` jack · `R1n1` 22 Ω burden · `JP1n` mA/V jumper · `R1n2` 1 kΩ · `R1n3` 1.8 kΩ · `C1n` 100 nF · `D1n` BAT54S
+
+### Resistor colour codes (4-band)
+
+| Value | Bands |
+|---|---|
+| 10 kΩ | brown · black · orange |
+| 1 kΩ | brown · black · red |
+| 1.8 kΩ | brown · grey · red |
+| 22 Ω | red · red · black |
+| 24 Ω | red · yellow · black |
+| 18 Ω | brown · grey · black (⚠ not 18 kΩ = brown · grey · orange) |
+
+A ceramic cap marked **104** = 100 nF; **103** = 10 nF; **473** = 47 nF.
+
+---
+
+## Working on another PC
+
+```bash
+git clone https://github.com/manoranjan2050/ESP32-AC-Energy-Monitor.git
+```
+
+- **PCB:** install KiCad 10 and open `hardware/kicad/ct6-energy-monitor.kicad_pro`.
+- **Firmware:** copy `esphome/secrets.example.yaml` to `esphome/secrets.yaml` (git-ignored) and fill in your Wi-Fi and keys.
+- **Regenerate** (optional; this overwrites the KiCad files, so **don't** run it after editing the board by hand):
+
+  ```bash
+  "C:/Program Files/KiCad/10.0/bin/python.exe" hardware/generate_kicad.py
+  ```
+
+## Before ordering the PCB
+
+1. Measure the **DevKit header row spacing** (22.86 mm) and check every pin used.
+2. Check the **ZMPT101B pin grid**: 10.0 × 12.7 mm, with calipers.
+3. **Screw terminals:** the wire entry faces the board edge.
+4. Keep the **6.5 mm mains creepage** and the **slot under T1**.
+5. **First power-up without mains and without CTs.** Expect +3V3A ≈ 3.3 V, VB ≈ 1.50 V, and every CTn_ADC / V_ADC ≈ 1.50 V.
+
+Full details are in [`hardware/README.md`](hardware/README.md).
+
+---
+
+## Next steps
+
+1. Order and build PCB v0.1, then test it: the CT channels first, then the on-board voltage stage (untested so far).
+2. **6-channel + voltage ESPHome firmware:**
+   - per-channel CT type, ratio and calibration
+   - V + I sampled together for **real power, power factor, frequency and kWh**
+   - Home Assistant **Energy dashboard** support
+
+---
+
+# Stage-1 test firmware guide (1 CT, breadboard)
+
+> The sections below document the **first single-CT test**. Its bias circuit (10k/10k) and direct CT
+> wiring were the starting point. The **final, proven channel circuit** adds the 1 kΩ / 1.8 kΩ / 104
+> network shown above: use [`breadboard_connection.svg`](hardware/renders/breadboard_connection.svg) and set
+> **Calibration 1.555**.
+
+- Board: **ESP32-S3** (QFN56 rev v0.2, 16 MB flash, 8 MB PSRAM, native USB)
+- ESPHome: **2026.8.2**, esp-idf framework
+- Firmware: [`esphome/energy_monitor_test.yaml`](esphome/energy_monitor_test.yaml)
+- Wiring checks: [`docs/wiring.md`](docs/wiring.md)
+
 
 ## 1. Hardware wiring (overview)
 
@@ -190,7 +398,9 @@ better signal-to-noise ratio for calibration (divide by 5 afterwards).
 
 ---
 
-## Roadmap (not implemented yet, pending a successful 1-channel test)
+## Original roadmap (written before the 1-channel test)
+
+The 1-channel test has since passed, and the 6-CT PCB is designed. See **Project status** and **Next steps** at the top of this README.
 
 ```
 ESP32-S3
