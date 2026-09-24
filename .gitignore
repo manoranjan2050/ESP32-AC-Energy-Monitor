@@ -1,0 +1,19 @@
+# ESPHome: real secrets and build output never go to git
+esphome/secrets.yaml
+esphome/.esphome/
+
+# Python
+__pycache__/
+*.pyc
+
+# KiCad backups / temporary / autorouter scratch files
+hardware/kicad/*-backups/
+hardware/kicad/*.lck
+hardware/kicad/_autosave-*
+hardware/kicad/fp-info-cache
+hardware/kicad/*.dsn
+hardware/kicad/*.ses
+hardware/kicad/*.rpt
+hardware/logs/
+freerouting.json
+*.jar

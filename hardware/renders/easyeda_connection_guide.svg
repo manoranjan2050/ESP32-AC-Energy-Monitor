@@ -1,0 +1,906 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1624 3115" width="1624" height="3115" font-family="Segoe UI, Arial, sans-serif"><rect width="1624" height="3115" fill="#ffffff"/>
+<text x="30" y="44" font-size="26" fill="#1b2733" font-weight="700" text-anchor="start">CT6 Energy Monitor v0.1: EasyEDA connection guide (every part, every pin, every net)</text>
+<text x="30" y="70" font-size="14" fill="#4a5a6a" font-weight="400" text-anchor="start">Generated from the verified KiCad netlist (ERC 0 · DRC 0). In EasyEDA: place each part, then put a Net Label with the EXACT coloured name on each pin. Same name = connected.</text>
+<text x="30" y="90" font-size="14" fill="#4a5a6a" font-weight="400" text-anchor="start">Pins marked "no connect" stay empty. Power nets: use EasyEDA net labels (not power symbols) so the names match exactly: +5V, +3V3, +3V3A, GND, VB.</text>
+<rect x="30" y="108" width="1564" height="36" rx="8" fill="#ffffff" stroke="#b8c4d0"/>
+<rect x="46" y="118" width="26" height="14" rx="7" fill="#d62828"/>
+<text x="78" y="130" font-size="12.5" fill="#1b2733" font-weight="400" text-anchor="start">Power (+5V, +3V3, +3V3A, VIN)</text>
+<rect x="294.8" y="118" width="26" height="14" rx="7" fill="#222222"/>
+<text x="326.8" y="130" font-size="12.5" fill="#1b2733" font-weight="400" text-anchor="start">GND</text>
+<rect x="356.40000000000003" y="118" width="26" height="14" rx="7" fill="#1d6fd6"/>
+<text x="388.40000000000003" y="130" font-size="12.5" fill="#1b2733" font-weight="400" text-anchor="start">Bias VB (≈1.5 V)</text>
+<rect x="511.6" y="118" width="26" height="14" rx="7" fill="#2a9d3f"/>
+<text x="543.6" y="130" font-size="12.5" fill="#1b2733" font-weight="400" text-anchor="start">CT tip side</text>
+<rect x="630.8000000000001" y="118" width="26" height="14" rx="7" fill="#e07b00"/>
+<text x="662.8000000000001" y="130" font-size="12.5" fill="#1b2733" font-weight="400" text-anchor="start">CT → ADC</text>
+<rect x="728.4000000000001" y="118" width="26" height="14" rx="7" fill="#7b2cbf"/>
+<text x="760.4000000000001" y="130" font-size="12.5" fill="#1b2733" font-weight="400" text-anchor="start">Voltage signal</text>
+<rect x="869.2" y="118" width="26" height="14" rx="7" fill="#b3261e"/>
+<text x="901.2" y="130" font-size="12.5" fill="#1b2733" font-weight="400" text-anchor="start">230 V MAINS (AC_*)</text>
+<rect x="1038.8" y="118" width="26" height="14" rx="7" fill="#4a5a6a"/>
+<text x="1070.8" y="130" font-size="12.5" fill="#1b2733" font-weight="400" text-anchor="start">Other</text>
+<text x="30" y="180" font-size="20" fill="#1b2733" font-weight="700" text-anchor="start">1 · Power input (5 V terminal or USB-C, power only)</text>
+<text x="30" y="204" font-size="13" fill="#8a4b00" font-weight="400" text-anchor="start" font-style="italic">+3V3 comes from the DevKit's own 3V3 pin; FB1 makes the clean analog rail +3V3A.</text>
+<rect x="30" y="222" width="300" height="92" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="42" y="242" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">J1  ·  5V IN</text>
+<text x="42" y="259" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">Screw terminal 2P 5.08mm  ·  KF128-5.08-2P</text>
+<text x="42" y="280" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<text x="92" y="280" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">+5V in</text>
+<rect x="198" y="267" width="120" height="17" rx="8" fill="#d62828"/>
+<text x="258.0" y="280" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VIN_RAW</text>
+<text x="42" y="299" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<text x="92" y="299" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GND</text>
+<rect x="198" y="286" width="120" height="17" rx="8" fill="#222222"/>
+<text x="258.0" y="299" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">GND</text>
+<rect x="346" y="222" width="300" height="187" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="358" y="242" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">J2  ·  USB-C 5V (power only)</text>
+<text x="358" y="259" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">USB-C 6P power-only  ·  TYPE-C-6P</text>
+<text x="358" y="280" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin A5</text>
+<text x="408" y="280" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">CC1</text>
+<rect x="514" y="267" width="120" height="17" rx="8" fill="#4a5a6a"/>
+<text x="574.0" y="280" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CC1</text>
+<text x="358" y="299" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin A9</text>
+<text x="408" y="299" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">VBUS</text>
+<rect x="514" y="286" width="120" height="17" rx="8" fill="#d62828"/>
+<text x="574.0" y="299" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VIN_RAW</text>
+<text x="358" y="318" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin B5</text>
+<text x="408" y="318" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">CC2</text>
+<rect x="514" y="305" width="120" height="17" rx="8" fill="#4a5a6a"/>
+<text x="574.0" y="318" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CC2</text>
+<text x="358" y="337" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin B9</text>
+<text x="408" y="337" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">VBUS</text>
+<rect x="514" y="324" width="120" height="17" rx="8" fill="#d62828"/>
+<text x="574.0" y="337" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VIN_RAW</text>
+<text x="358" y="356" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin SH</text>
+<text x="408" y="356" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">Shield</text>
+<rect x="514" y="343" width="120" height="17" rx="8" fill="#222222"/>
+<text x="574.0" y="356" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">GND</text>
+<text x="358" y="375" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin A12</text>
+<text x="408" y="375" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GND</text>
+<rect x="514" y="362" width="120" height="17" rx="8" fill="#222222"/>
+<text x="574.0" y="375" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">GND</text>
+<text x="358" y="394" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin B12</text>
+<text x="408" y="394" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GND</text>
+<rect x="514" y="381" width="120" height="17" rx="8" fill="#222222"/>
+<text x="574.0" y="394" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">GND</text>
+<rect x="662" y="222" width="300" height="92" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="674" y="242" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">R1  ·  5.1k</text>
+<text x="674" y="259" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">R_0805</text>
+<text x="674" y="280" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="830" y="267" width="120" height="17" rx="8" fill="#4a5a6a"/>
+<text x="890.0" y="280" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CC1</text>
+<text x="674" y="299" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="830" y="286" width="120" height="17" rx="8" fill="#222222"/>
+<text x="890.0" y="299" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">GND</text>
+<rect x="978" y="222" width="300" height="92" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="990" y="242" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">R2  ·  5.1k</text>
+<text x="990" y="259" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">R_0805</text>
+<text x="990" y="280" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="1146" y="267" width="120" height="17" rx="8" fill="#4a5a6a"/>
+<text x="1206.0" y="280" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CC2</text>
+<text x="990" y="299" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="1146" y="286" width="120" height="17" rx="8" fill="#222222"/>
+<text x="1206.0" y="299" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">GND</text>
+<rect x="1294" y="222" width="300" height="92" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="1306" y="242" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">F1  ·  500mA hold</text>
+<text x="1306" y="259" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">Fuse_1206  ·  SMD1206P050TF</text>
+<text x="1306" y="280" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="1462" y="267" width="120" height="17" rx="8" fill="#d62828"/>
+<text x="1522.0" y="280" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VIN_RAW</text>
+<text x="1306" y="299" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="1462" y="286" width="120" height="17" rx="8" fill="#d62828"/>
+<text x="1522.0" y="299" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VIN_F</text>
+<rect x="30" y="326" width="300" height="92" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="42" y="346" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">D1  ·  SS34</text>
+<text x="42" y="363" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">D_SMA  ·  SS34</text>
+<text x="42" y="384" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<text x="92" y="384" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">K (cathode, band)</text>
+<rect x="198" y="371" width="120" height="17" rx="8" fill="#d62828"/>
+<text x="258.0" y="384" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">+5V</text>
+<text x="42" y="403" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<text x="92" y="403" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">A (anode)</text>
+<rect x="198" y="390" width="120" height="17" rx="8" fill="#d62828"/>
+<text x="258.0" y="403" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VIN_F</text>
+<rect x="662" y="326" width="300" height="92" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="674" y="346" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">C1  ·  22uF 16V</text>
+<text x="674" y="363" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">C_1206</text>
+<text x="674" y="384" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="830" y="371" width="120" height="17" rx="8" fill="#d62828"/>
+<text x="890.0" y="384" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">+5V</text>
+<text x="674" y="403" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="830" y="390" width="120" height="17" rx="8" fill="#222222"/>
+<text x="890.0" y="403" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">GND</text>
+<rect x="978" y="326" width="300" height="92" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="990" y="346" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">FB1  ·  600R@100MHz</text>
+<text x="990" y="363" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">L_0805  ·  BLM21PG601</text>
+<text x="990" y="384" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="1146" y="371" width="120" height="17" rx="8" fill="#d62828"/>
+<text x="1206.0" y="384" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">+3V3</text>
+<text x="990" y="403" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="1146" y="390" width="120" height="17" rx="8" fill="#d62828"/>
+<text x="1206.0" y="403" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">+3V3A</text>
+<rect x="1294" y="326" width="300" height="92" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="1306" y="346" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">C2  ·  10uF</text>
+<text x="1306" y="363" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">C_0805</text>
+<text x="1306" y="384" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="1462" y="371" width="120" height="17" rx="8" fill="#d62828"/>
+<text x="1522.0" y="384" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">+3V3A</text>
+<text x="1306" y="403" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="1462" y="390" width="120" height="17" rx="8" fill="#222222"/>
+<text x="1522.0" y="403" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">GND</text>
+<rect x="346" y="421" width="300" height="92" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="358" y="441" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">C3  ·  100nF</text>
+<text x="358" y="458" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">C_0805</text>
+<text x="358" y="479" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="514" y="466" width="120" height="17" rx="8" fill="#d62828"/>
+<text x="574.0" y="479" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">+3V3A</text>
+<text x="358" y="498" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="514" y="485" width="120" height="17" rx="8" fill="#222222"/>
+<text x="574.0" y="498" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">GND</text>
+<text x="30" y="555" font-size="20" fill="#1b2733" font-weight="700" text-anchor="start">2 · Bias VB ≈ 1.50 V (MCP6002 unit A) + op-amp decoupling</text>
+<text x="30" y="579" font-size="13" fill="#8a4b00" font-weight="400" text-anchor="start" font-style="italic">U1 is one MCP6002 chip: unit A = bias buffer, unit B = voltage amplifier (section 3). R5 47Ω isolates the op-amp from C6.</text>
+<rect x="30" y="597" width="300" height="92" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="42" y="617" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">R3  ·  12k 1%</text>
+<text x="42" y="634" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">R_0805</text>
+<text x="42" y="655" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="198" y="642" width="120" height="17" rx="8" fill="#d62828"/>
+<text x="258.0" y="655" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">+3V3A</text>
+<text x="42" y="674" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="198" y="661" width="120" height="17" rx="8" fill="#1d6fd6"/>
+<text x="258.0" y="674" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VB_DIV</text>
+<rect x="346" y="597" width="300" height="92" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="358" y="617" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">R4  ·  10k 1%</text>
+<text x="358" y="634" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">R_0805</text>
+<text x="358" y="655" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="514" y="642" width="120" height="17" rx="8" fill="#1d6fd6"/>
+<text x="574.0" y="655" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VB_DIV</text>
+<text x="358" y="674" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="514" y="661" width="120" height="17" rx="8" fill="#222222"/>
+<text x="574.0" y="674" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">GND</text>
+<rect x="662" y="597" width="300" height="92" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="674" y="617" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">C4  ·  100nF</text>
+<text x="674" y="634" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">C_0805</text>
+<text x="674" y="655" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="830" y="642" width="120" height="17" rx="8" fill="#1d6fd6"/>
+<text x="890.0" y="655" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VB_DIV</text>
+<text x="674" y="674" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="830" y="661" width="120" height="17" rx="8" fill="#222222"/>
+<text x="890.0" y="674" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">GND</text>
+<rect x="978" y="597" width="300" height="206" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="990" y="617" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">U1  ·  MCP6002-E/SN</text>
+<text x="990" y="634" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">SOIC-8  ·  MCP6002T-E/SN</text>
+<text x="990" y="655" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<text x="1040" y="655" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">OUT A</text>
+<rect x="1146" y="642" width="120" height="17" rx="8" fill="#1d6fd6"/>
+<text x="1206.0" y="655" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VB_OUT</text>
+<text x="990" y="674" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<text x="1040" y="674" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">−IN A</text>
+<rect x="1146" y="661" width="120" height="17" rx="8" fill="#1d6fd6"/>
+<text x="1206.0" y="674" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VB_OUT</text>
+<text x="990" y="693" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 3</text>
+<text x="1040" y="693" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">+IN A</text>
+<rect x="1146" y="680" width="120" height="17" rx="8" fill="#1d6fd6"/>
+<text x="1206.0" y="693" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VB_DIV</text>
+<text x="990" y="712" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 4</text>
+<text x="1040" y="712" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">V− (GND)</text>
+<rect x="1146" y="699" width="120" height="17" rx="8" fill="#222222"/>
+<text x="1206.0" y="712" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">GND</text>
+<text x="990" y="731" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 5</text>
+<text x="1040" y="731" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">+IN B</text>
+<rect x="1146" y="718" width="120" height="17" rx="8" fill="#1d6fd6"/>
+<text x="1206.0" y="731" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VB</text>
+<text x="990" y="750" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 6</text>
+<text x="1040" y="750" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">−IN B</text>
+<rect x="1146" y="737" width="120" height="17" rx="8" fill="#7b2cbf"/>
+<text x="1206.0" y="750" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">ZS_A</text>
+<text x="990" y="769" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 7</text>
+<text x="1040" y="769" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">OUT B</text>
+<rect x="1146" y="756" width="120" height="17" rx="8" fill="#7b2cbf"/>
+<text x="1206.0" y="769" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">V_OUT</text>
+<text x="990" y="788" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 8</text>
+<text x="1040" y="788" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">V+</text>
+<rect x="1146" y="775" width="120" height="17" rx="8" fill="#d62828"/>
+<text x="1206.0" y="788" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">+3V3A</text>
+<rect x="1294" y="597" width="300" height="92" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="1306" y="617" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">C5  ·  100nF</text>
+<text x="1306" y="634" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">C_0805</text>
+<text x="1306" y="655" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="1462" y="642" width="120" height="17" rx="8" fill="#d62828"/>
+<text x="1522.0" y="655" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">+3V3A</text>
+<text x="1306" y="674" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="1462" y="661" width="120" height="17" rx="8" fill="#222222"/>
+<text x="1522.0" y="674" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">GND</text>
+<rect x="30" y="701" width="300" height="92" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="42" y="721" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">R5  ·  47R</text>
+<text x="42" y="738" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">R_0805</text>
+<text x="42" y="759" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="198" y="746" width="120" height="17" rx="8" fill="#1d6fd6"/>
+<text x="258.0" y="759" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VB_OUT</text>
+<text x="42" y="778" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="198" y="765" width="120" height="17" rx="8" fill="#1d6fd6"/>
+<text x="258.0" y="778" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VB</text>
+<rect x="346" y="701" width="300" height="92" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="358" y="721" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">C6  ·  10uF</text>
+<text x="358" y="738" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">C_0805</text>
+<text x="358" y="759" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="514" y="746" width="120" height="17" rx="8" fill="#1d6fd6"/>
+<text x="574.0" y="759" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VB</text>
+<text x="358" y="778" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="514" y="765" width="120" height="17" rx="8" fill="#222222"/>
+<text x="574.0" y="778" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">GND</text>
+<rect x="662" y="701" width="300" height="92" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="674" y="721" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">C7  ·  100nF</text>
+<text x="674" y="738" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">C_0805</text>
+<text x="674" y="759" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="830" y="746" width="120" height="17" rx="8" fill="#1d6fd6"/>
+<text x="890.0" y="759" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VB</text>
+<text x="674" y="778" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="830" y="765" width="120" height="17" rx="8" fill="#222222"/>
+<text x="890.0" y="778" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">GND</text>
+<rect x="1294" y="701" width="300" height="92" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="1306" y="721" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">R6  ·  1k</text>
+<text x="1306" y="738" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">R_0805</text>
+<text x="1306" y="759" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="1462" y="746" width="120" height="17" rx="8" fill="#1d6fd6"/>
+<text x="1522.0" y="759" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VB</text>
+<text x="1306" y="778" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="1462" y="765" width="120" height="17" rx="8" fill="#1d6fd6"/>
+<text x="1522.0" y="778" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VB_MON</text>
+<text x="30" y="845" font-size="20" fill="#1b2733" font-weight="700" text-anchor="start">3 · Mains voltage sensing ⚠ 230 V: keep ≥ 6.5 mm from all other copper, slot under T1</text>
+<text x="30" y="869" font-size="13" fill="#8a4b00" font-weight="400" text-anchor="start" font-style="italic">AC_* nets are LIVE. T1 (ZMPT101B) is the isolation barrier: primary pins 1-2 mains, secondary pins 3-4 low voltage.</text>
+<rect x="30" y="887" width="300" height="92" rx="8" fill="#fff1f0" stroke="#c0392b" stroke-width="1.5"/>
+<text x="42" y="907" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">J5  ·  230V AC (L,N)</text>
+<text x="42" y="924" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">Screw terminal 2P 5.08mm  ·  KF128-5.08-2P 300V</text>
+<text x="42" y="945" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<text x="92" y="945" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">L (live)</text>
+<rect x="198" y="932" width="120" height="17" rx="8" fill="#b3261e"/>
+<text x="258.0" y="945" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">AC_L</text>
+<text x="42" y="964" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<text x="92" y="964" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">N (neutral)</text>
+<rect x="198" y="951" width="120" height="17" rx="8" fill="#b3261e"/>
+<text x="258.0" y="964" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">AC_N</text>
+<rect x="346" y="887" width="300" height="92" rx="8" fill="#fff1f0" stroke="#c0392b" stroke-width="1.5"/>
+<text x="358" y="907" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">F2  ·  100mA T 250V</text>
+<text x="358" y="924" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">TR5 fuse (395 series)  ·  Littelfuse 39211000440…</text>
+<text x="358" y="945" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="514" y="932" width="120" height="17" rx="8" fill="#b3261e"/>
+<text x="574.0" y="945" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">AC_L</text>
+<text x="358" y="964" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="514" y="951" width="120" height="17" rx="8" fill="#b3261e"/>
+<text x="574.0" y="964" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">AC_LF</text>
+<rect x="662" y="887" width="300" height="92" rx="8" fill="#fff1f0" stroke="#c0392b" stroke-width="1.5"/>
+<text x="674" y="907" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">RV1  ·  275VAC 7mm</text>
+<text x="674" y="924" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">MOV disc 7mm P5  ·  7D431K</text>
+<text x="674" y="945" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="830" y="932" width="120" height="17" rx="8" fill="#b3261e"/>
+<text x="890.0" y="945" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">AC_LF</text>
+<text x="674" y="964" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="830" y="951" width="120" height="17" rx="8" fill="#b3261e"/>
+<text x="890.0" y="964" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">AC_N</text>
+<rect x="978" y="887" width="300" height="92" rx="8" fill="#fff1f0" stroke="#c0392b" stroke-width="1.5"/>
+<text x="990" y="907" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">R41  ·  220k 1% 1206</text>
+<text x="990" y="924" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">R_1206  ·  1206 220k 1% (200V)</text>
+<text x="990" y="945" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="1146" y="932" width="120" height="17" rx="8" fill="#b3261e"/>
+<text x="1206.0" y="945" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">AC_LF</text>
+<text x="990" y="964" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="1146" y="951" width="120" height="17" rx="8" fill="#b3261e"/>
+<text x="1206.0" y="964" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">AC_M1</text>
+<rect x="1294" y="887" width="300" height="92" rx="8" fill="#fff1f0" stroke="#c0392b" stroke-width="1.5"/>
+<text x="1306" y="907" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">R42  ·  220k 1% 1206</text>
+<text x="1306" y="924" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">R_1206  ·  1206 220k 1% (200V)</text>
+<text x="1306" y="945" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="1462" y="932" width="120" height="17" rx="8" fill="#b3261e"/>
+<text x="1522.0" y="945" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">AC_M1</text>
+<text x="1306" y="964" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="1462" y="951" width="120" height="17" rx="8" fill="#b3261e"/>
+<text x="1522.0" y="964" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">AC_M2</text>
+<rect x="30" y="991" width="300" height="92" rx="8" fill="#fff1f0" stroke="#c0392b" stroke-width="1.5"/>
+<text x="42" y="1011" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">R43  ·  220k 1% 1206</text>
+<text x="42" y="1028" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">R_1206  ·  1206 220k 1% (200V)</text>
+<text x="42" y="1049" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="198" y="1036" width="120" height="17" rx="8" fill="#b3261e"/>
+<text x="258.0" y="1049" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">AC_M2</text>
+<text x="42" y="1068" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="198" y="1055" width="120" height="17" rx="8" fill="#b3261e"/>
+<text x="258.0" y="1068" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">AC_M3</text>
+<rect x="346" y="991" width="300" height="92" rx="8" fill="#fff1f0" stroke="#c0392b" stroke-width="1.5"/>
+<text x="358" y="1011" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">R44  ·  220k 1% 1206</text>
+<text x="358" y="1028" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">R_1206  ·  1206 220k 1% (200V)</text>
+<text x="358" y="1049" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="514" y="1036" width="120" height="17" rx="8" fill="#b3261e"/>
+<text x="574.0" y="1049" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">AC_M3</text>
+<text x="358" y="1068" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="514" y="1055" width="120" height="17" rx="8" fill="#b3261e"/>
+<text x="574.0" y="1068" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">AC_ZP</text>
+<rect x="662" y="991" width="300" height="130" rx="8" fill="#fff1f0" stroke="#c0392b" stroke-width="1.5"/>
+<text x="674" y="1011" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">T1  ·  ZMPT101B</text>
+<text x="674" y="1028" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">ZMPT101B  ·  ZMPT101B</text>
+<text x="674" y="1049" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<text x="724" y="1049" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">VA1 primary</text>
+<rect x="830" y="1036" width="120" height="17" rx="8" fill="#b3261e"/>
+<text x="890.0" y="1049" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">AC_ZP</text>
+<text x="674" y="1068" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<text x="724" y="1068" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">VA2 primary</text>
+<rect x="830" y="1055" width="120" height="17" rx="8" fill="#b3261e"/>
+<text x="890.0" y="1068" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">AC_N</text>
+<text x="674" y="1087" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 3</text>
+<text x="724" y="1087" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">VB1 secondary</text>
+<rect x="830" y="1074" width="120" height="17" rx="8" fill="#1d6fd6"/>
+<text x="890.0" y="1087" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VB</text>
+<text x="674" y="1106" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 4</text>
+<text x="724" y="1106" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">VB2 secondary</text>
+<rect x="830" y="1093" width="120" height="17" rx="8" fill="#7b2cbf"/>
+<text x="890.0" y="1106" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">ZS_A</text>
+<rect x="978" y="991" width="300" height="92" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="990" y="1011" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">R47  ·  2k7 1%</text>
+<text x="990" y="1028" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">R_0805</text>
+<text x="990" y="1049" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="1146" y="1036" width="120" height="17" rx="8" fill="#7b2cbf"/>
+<text x="1206.0" y="1049" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">ZS_A</text>
+<text x="990" y="1068" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="1146" y="1055" width="120" height="17" rx="8" fill="#7b2cbf"/>
+<text x="1206.0" y="1068" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">V_OUT</text>
+<rect x="1294" y="991" width="300" height="92" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="1306" y="1011" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">C41  ·  47nF</text>
+<text x="1306" y="1028" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">C_0805</text>
+<text x="1306" y="1049" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="1462" y="1036" width="120" height="17" rx="8" fill="#7b2cbf"/>
+<text x="1522.0" y="1049" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">ZS_A</text>
+<text x="1306" y="1068" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="1462" y="1055" width="120" height="17" rx="8" fill="#7b2cbf"/>
+<text x="1522.0" y="1068" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">V_OUT</text>
+<rect x="30" y="1095" width="300" height="92" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="42" y="1115" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">R48  ·  1k</text>
+<text x="42" y="1132" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">R_0805</text>
+<text x="42" y="1153" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="198" y="1140" width="120" height="17" rx="8" fill="#7b2cbf"/>
+<text x="258.0" y="1153" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">V_OUT</text>
+<text x="42" y="1172" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="198" y="1159" width="120" height="17" rx="8" fill="#7b2cbf"/>
+<text x="258.0" y="1172" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">V_ADC</text>
+<rect x="346" y="1095" width="300" height="92" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="358" y="1115" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">C42  ·  100nF</text>
+<text x="358" y="1132" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">C_0805</text>
+<text x="358" y="1153" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="514" y="1140" width="120" height="17" rx="8" fill="#7b2cbf"/>
+<text x="574.0" y="1153" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">V_ADC</text>
+<text x="358" y="1172" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="514" y="1159" width="120" height="17" rx="8" fill="#222222"/>
+<text x="574.0" y="1172" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">GND</text>
+<rect x="978" y="1095" width="300" height="111" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="990" y="1115" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">D41  ·  BAT54S</text>
+<text x="990" y="1132" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">SOT-23</text>
+<text x="990" y="1153" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<text x="1040" y="1153" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">A (to GND)</text>
+<rect x="1146" y="1140" width="120" height="17" rx="8" fill="#222222"/>
+<text x="1206.0" y="1153" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">GND</text>
+<text x="990" y="1172" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<text x="1040" y="1172" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">K (to 3V3A)</text>
+<rect x="1146" y="1159" width="120" height="17" rx="8" fill="#d62828"/>
+<text x="1206.0" y="1172" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">+3V3A</text>
+<text x="990" y="1191" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 3</text>
+<text x="1040" y="1191" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">COM</text>
+<rect x="1146" y="1178" width="120" height="17" rx="8" fill="#7b2cbf"/>
+<text x="1206.0" y="1191" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">V_ADC</text>
+<text x="30" y="1248" font-size="20" fill="#1b2733" font-weight="700" text-anchor="start">4 · CT channel (CT1 shown; CT2–CT6 are identical, see table below)</text>
+<text x="30" y="1272" font-size="13" fill="#8a4b00" font-weight="400" text-anchor="start" font-style="italic">JP jumper: shunt on pins 1-2 = mA CT (100A/50mA, burden IN, default); pins 2-3 = 1 V CT (30A/1V, burden OUT).</text>
+<rect x="30" y="1290" width="300" height="111" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="42" y="1310" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">J11  ·  CT1</text>
+<text x="42" y="1327" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">3.5mm jack SJ1-3523N (PJ-3523)  ·  SJ1-3523N / P…</text>
+<text x="42" y="1348" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin R</text>
+<text x="92" y="1348" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">Ring (unused)</text>
+<rect x="198" y="1335" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="258.0" y="1348" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="42" y="1367" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin S</text>
+<text x="92" y="1367" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">Sleeve</text>
+<rect x="198" y="1354" width="120" height="17" rx="8" fill="#1d6fd6"/>
+<text x="258.0" y="1367" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VB</text>
+<text x="42" y="1386" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin T</text>
+<text x="92" y="1386" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">Tip</text>
+<rect x="198" y="1373" width="120" height="17" rx="8" fill="#2a9d3f"/>
+<text x="258.0" y="1386" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT1_SIG</text>
+<rect x="346" y="1290" width="300" height="92" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="358" y="1310" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">R111  ·  22R 0.1%</text>
+<text x="358" y="1327" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">R_0805  ·  0805 22R 0.1% 25ppm</text>
+<text x="358" y="1348" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="514" y="1335" width="120" height="17" rx="8" fill="#2a9d3f"/>
+<text x="574.0" y="1348" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT1_SIG</text>
+<text x="358" y="1367" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="514" y="1354" width="120" height="17" rx="8" fill="#2a9d3f"/>
+<text x="574.0" y="1367" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT1_MA</text>
+<rect x="662" y="1290" width="300" height="111" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="674" y="1310" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">JP11  ·  mA|V</text>
+<text x="674" y="1327" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">Pin header 1x03 2.54mm</text>
+<text x="674" y="1348" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<text x="724" y="1348" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">mA side</text>
+<rect x="830" y="1335" width="120" height="17" rx="8" fill="#1d6fd6"/>
+<text x="890.0" y="1348" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VB</text>
+<text x="674" y="1367" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<text x="724" y="1367" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">middle</text>
+<rect x="830" y="1354" width="120" height="17" rx="8" fill="#2a9d3f"/>
+<text x="890.0" y="1367" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT1_MA</text>
+<text x="674" y="1386" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 3</text>
+<text x="724" y="1386" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">V side</text>
+<rect x="830" y="1373" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="890.0" y="1386" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<rect x="978" y="1290" width="300" height="92" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="990" y="1310" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">R112  ·  1k 1%</text>
+<text x="990" y="1327" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">R_0805</text>
+<text x="990" y="1348" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="1146" y="1335" width="120" height="17" rx="8" fill="#2a9d3f"/>
+<text x="1206.0" y="1348" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT1_SIG</text>
+<text x="990" y="1367" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="1146" y="1354" width="120" height="17" rx="8" fill="#e07b00"/>
+<text x="1206.0" y="1367" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT1_ADC</text>
+<rect x="1294" y="1290" width="300" height="92" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="1306" y="1310" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">R113  ·  1k8 1%</text>
+<text x="1306" y="1327" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">R_0805</text>
+<text x="1306" y="1348" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="1462" y="1335" width="120" height="17" rx="8" fill="#e07b00"/>
+<text x="1522.0" y="1348" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT1_ADC</text>
+<text x="1306" y="1367" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="1462" y="1354" width="120" height="17" rx="8" fill="#1d6fd6"/>
+<text x="1522.0" y="1367" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VB</text>
+<rect x="346" y="1394" width="300" height="92" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="358" y="1414" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">C11  ·  100nF</text>
+<text x="358" y="1431" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">C_0805</text>
+<text x="358" y="1452" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<rect x="514" y="1439" width="120" height="17" rx="8" fill="#e07b00"/>
+<text x="574.0" y="1452" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT1_ADC</text>
+<text x="358" y="1471" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<rect x="514" y="1458" width="120" height="17" rx="8" fill="#222222"/>
+<text x="574.0" y="1471" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">GND</text>
+<rect x="978" y="1394" width="300" height="111" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="990" y="1414" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">D11  ·  BAT54S</text>
+<text x="990" y="1431" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">SOT-23</text>
+<text x="990" y="1452" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<text x="1040" y="1452" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">A (to GND)</text>
+<rect x="1146" y="1439" width="120" height="17" rx="8" fill="#222222"/>
+<text x="1206.0" y="1452" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">GND</text>
+<text x="990" y="1471" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<text x="1040" y="1471" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">K (to 3V3A)</text>
+<rect x="1146" y="1458" width="120" height="17" rx="8" fill="#d62828"/>
+<text x="1206.0" y="1471" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">+3V3A</text>
+<text x="990" y="1490" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 3</text>
+<text x="1040" y="1490" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">COM</text>
+<rect x="1146" y="1477" width="120" height="17" rx="8" fill="#e07b00"/>
+<text x="1206.0" y="1490" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT1_ADC</text>
+<rect x="30" y="1527" width="1100" height="186" rx="8" fill="#f7f9fb" stroke="#b8c4d0"/>
+<text x="40" y="1547" font-size="13" fill="#1b2733" font-weight="700" text-anchor="start">Channel</text>
+<text x="130" y="1547" font-size="13" fill="#1b2733" font-weight="700" text-anchor="start">Jack</text>
+<text x="200" y="1547" font-size="13" fill="#1b2733" font-weight="700" text-anchor="start">Burden 22Ω</text>
+<text x="310" y="1547" font-size="13" fill="#1b2733" font-weight="700" text-anchor="start">Jumper</text>
+<text x="390" y="1547" font-size="13" fill="#1b2733" font-weight="700" text-anchor="start">1k</text>
+<text x="460" y="1547" font-size="13" fill="#1b2733" font-weight="700" text-anchor="start">1.8k</text>
+<text x="530" y="1547" font-size="13" fill="#1b2733" font-weight="700" text-anchor="start">100nF</text>
+<text x="610" y="1547" font-size="13" fill="#1b2733" font-weight="700" text-anchor="start">BAT54S</text>
+<text x="700" y="1547" font-size="13" fill="#1b2733" font-weight="700" text-anchor="start">Tip net</text>
+<text x="810" y="1547" font-size="13" fill="#1b2733" font-weight="700" text-anchor="start">Burden net</text>
+<text x="920" y="1547" font-size="13" fill="#1b2733" font-weight="700" text-anchor="start">ADC net</text>
+<text x="1030" y="1547" font-size="13" fill="#1b2733" font-weight="700" text-anchor="start">GPIO</text>
+<text x="40" y="1573" font-size="13" fill="#1b2733" font-weight="700" text-anchor="start">CT1</text>
+<text x="130" y="1573" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">J11</text>
+<text x="200" y="1573" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">R111</text>
+<text x="310" y="1573" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">JP11</text>
+<text x="390" y="1573" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">R112</text>
+<text x="460" y="1573" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">R113</text>
+<text x="530" y="1573" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">C11</text>
+<text x="610" y="1573" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">D11</text>
+<text x="700" y="1573" font-size="13" fill="#2a9d3f" font-weight="400" text-anchor="start">CT1_SIG</text>
+<text x="810" y="1573" font-size="13" fill="#2a9d3f" font-weight="400" text-anchor="start">CT1_MA</text>
+<text x="920" y="1573" font-size="13" fill="#e07b00" font-weight="400" text-anchor="start">CT1_ADC</text>
+<text x="1030" y="1573" font-size="13" fill="#1b2733" font-weight="700" text-anchor="start">GPIO1</text>
+<text x="40" y="1599" font-size="13" fill="#1b2733" font-weight="700" text-anchor="start">CT2</text>
+<text x="130" y="1599" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">J12</text>
+<text x="200" y="1599" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">R121</text>
+<text x="310" y="1599" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">JP12</text>
+<text x="390" y="1599" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">R122</text>
+<text x="460" y="1599" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">R123</text>
+<text x="530" y="1599" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">C12</text>
+<text x="610" y="1599" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">D12</text>
+<text x="700" y="1599" font-size="13" fill="#2a9d3f" font-weight="400" text-anchor="start">CT2_SIG</text>
+<text x="810" y="1599" font-size="13" fill="#2a9d3f" font-weight="400" text-anchor="start">CT2_MA</text>
+<text x="920" y="1599" font-size="13" fill="#e07b00" font-weight="400" text-anchor="start">CT2_ADC</text>
+<text x="1030" y="1599" font-size="13" fill="#1b2733" font-weight="700" text-anchor="start">GPIO4</text>
+<text x="40" y="1625" font-size="13" fill="#1b2733" font-weight="700" text-anchor="start">CT3</text>
+<text x="130" y="1625" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">J13</text>
+<text x="200" y="1625" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">R131</text>
+<text x="310" y="1625" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">JP13</text>
+<text x="390" y="1625" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">R132</text>
+<text x="460" y="1625" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">R133</text>
+<text x="530" y="1625" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">C13</text>
+<text x="610" y="1625" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">D13</text>
+<text x="700" y="1625" font-size="13" fill="#2a9d3f" font-weight="400" text-anchor="start">CT3_SIG</text>
+<text x="810" y="1625" font-size="13" fill="#2a9d3f" font-weight="400" text-anchor="start">CT3_MA</text>
+<text x="920" y="1625" font-size="13" fill="#e07b00" font-weight="400" text-anchor="start">CT3_ADC</text>
+<text x="1030" y="1625" font-size="13" fill="#1b2733" font-weight="700" text-anchor="start">GPIO5</text>
+<text x="40" y="1651" font-size="13" fill="#1b2733" font-weight="700" text-anchor="start">CT4</text>
+<text x="130" y="1651" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">J14</text>
+<text x="200" y="1651" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">R141</text>
+<text x="310" y="1651" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">JP14</text>
+<text x="390" y="1651" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">R142</text>
+<text x="460" y="1651" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">R143</text>
+<text x="530" y="1651" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">C14</text>
+<text x="610" y="1651" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">D14</text>
+<text x="700" y="1651" font-size="13" fill="#2a9d3f" font-weight="400" text-anchor="start">CT4_SIG</text>
+<text x="810" y="1651" font-size="13" fill="#2a9d3f" font-weight="400" text-anchor="start">CT4_MA</text>
+<text x="920" y="1651" font-size="13" fill="#e07b00" font-weight="400" text-anchor="start">CT4_ADC</text>
+<text x="1030" y="1651" font-size="13" fill="#1b2733" font-weight="700" text-anchor="start">GPIO6</text>
+<text x="40" y="1677" font-size="13" fill="#1b2733" font-weight="700" text-anchor="start">CT5</text>
+<text x="130" y="1677" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">J15</text>
+<text x="200" y="1677" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">R151</text>
+<text x="310" y="1677" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">JP15</text>
+<text x="390" y="1677" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">R152</text>
+<text x="460" y="1677" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">R153</text>
+<text x="530" y="1677" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">C15</text>
+<text x="610" y="1677" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">D15</text>
+<text x="700" y="1677" font-size="13" fill="#2a9d3f" font-weight="400" text-anchor="start">CT5_SIG</text>
+<text x="810" y="1677" font-size="13" fill="#2a9d3f" font-weight="400" text-anchor="start">CT5_MA</text>
+<text x="920" y="1677" font-size="13" fill="#e07b00" font-weight="400" text-anchor="start">CT5_ADC</text>
+<text x="1030" y="1677" font-size="13" fill="#1b2733" font-weight="700" text-anchor="start">GPIO7</text>
+<text x="40" y="1703" font-size="13" fill="#1b2733" font-weight="700" text-anchor="start">CT6</text>
+<text x="130" y="1703" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">J16</text>
+<text x="200" y="1703" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">R161</text>
+<text x="310" y="1703" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">JP16</text>
+<text x="390" y="1703" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">R162</text>
+<text x="460" y="1703" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">R163</text>
+<text x="530" y="1703" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">C16</text>
+<text x="610" y="1703" font-size="13" fill="#1b2733" font-weight="400" text-anchor="start">D16</text>
+<text x="700" y="1703" font-size="13" fill="#2a9d3f" font-weight="400" text-anchor="start">CT6_SIG</text>
+<text x="810" y="1703" font-size="13" fill="#2a9d3f" font-weight="400" text-anchor="start">CT6_MA</text>
+<text x="920" y="1703" font-size="13" fill="#e07b00" font-weight="400" text-anchor="start">CT6_ADC</text>
+<text x="1030" y="1703" font-size="13" fill="#1b2733" font-weight="700" text-anchor="start">GPIO8</text>
+<text x="30" y="1753" font-size="20" fill="#1b2733" font-weight="700" text-anchor="start">5 · ESP32-S3-DevKitC-1 sockets + I²C header</text>
+<text x="30" y="1777" font-size="13" fill="#8a4b00" font-weight="400" text-anchor="start" font-style="italic">Two 1×22 female headers, rows 22.86 mm apart (MEASURE your DevKit). Pin 1 = antenna end. Unused pins: no connect.</text>
+<rect x="30" y="1795" width="300" height="472" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="42" y="1815" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">J3  ·  DevKit J1 (3V3..GND)</text>
+<text x="42" y="1832" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">Female header 1x22 2.54mm</text>
+<text x="42" y="1853" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<text x="92" y="1853" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">3V3</text>
+<rect x="198" y="1840" width="120" height="17" rx="8" fill="#d62828"/>
+<text x="258.0" y="1853" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">+3V3</text>
+<text x="42" y="1872" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<text x="92" y="1872" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">3V3</text>
+<rect x="198" y="1859" width="120" height="17" rx="8" fill="#d62828"/>
+<text x="258.0" y="1872" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">+3V3</text>
+<text x="42" y="1891" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 3</text>
+<text x="92" y="1891" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">RST/EN</text>
+<rect x="198" y="1878" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="258.0" y="1891" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="42" y="1910" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 4</text>
+<text x="92" y="1910" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO4</text>
+<rect x="198" y="1897" width="120" height="17" rx="8" fill="#e07b00"/>
+<text x="258.0" y="1910" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT2_ADC</text>
+<text x="42" y="1929" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 5</text>
+<text x="92" y="1929" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO5</text>
+<rect x="198" y="1916" width="120" height="17" rx="8" fill="#e07b00"/>
+<text x="258.0" y="1929" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT3_ADC</text>
+<text x="42" y="1948" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 6</text>
+<text x="92" y="1948" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO6</text>
+<rect x="198" y="1935" width="120" height="17" rx="8" fill="#e07b00"/>
+<text x="258.0" y="1948" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT4_ADC</text>
+<text x="42" y="1967" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 7</text>
+<text x="92" y="1967" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO7</text>
+<rect x="198" y="1954" width="120" height="17" rx="8" fill="#e07b00"/>
+<text x="258.0" y="1967" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT5_ADC</text>
+<text x="42" y="1986" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 8</text>
+<text x="92" y="1986" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO15</text>
+<rect x="198" y="1973" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="258.0" y="1986" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="42" y="2005" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 9</text>
+<text x="92" y="2005" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO16</text>
+<rect x="198" y="1992" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="258.0" y="2005" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="42" y="2024" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 10</text>
+<text x="92" y="2024" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO17</text>
+<rect x="198" y="2011" width="120" height="17" rx="8" fill="#4a5a6a"/>
+<text x="258.0" y="2024" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">I2C_SDA</text>
+<text x="42" y="2043" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 11</text>
+<text x="92" y="2043" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO18</text>
+<rect x="198" y="2030" width="120" height="17" rx="8" fill="#4a5a6a"/>
+<text x="258.0" y="2043" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">I2C_SCL</text>
+<text x="42" y="2062" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 12</text>
+<text x="92" y="2062" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO8</text>
+<rect x="198" y="2049" width="120" height="17" rx="8" fill="#e07b00"/>
+<text x="258.0" y="2062" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT6_ADC</text>
+<text x="42" y="2081" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 13</text>
+<text x="92" y="2081" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO3</text>
+<rect x="198" y="2068" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="258.0" y="2081" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="42" y="2100" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 14</text>
+<text x="92" y="2100" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO46</text>
+<rect x="198" y="2087" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="258.0" y="2100" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="42" y="2119" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 15</text>
+<text x="92" y="2119" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO9</text>
+<rect x="198" y="2106" width="120" height="17" rx="8" fill="#7b2cbf"/>
+<text x="258.0" y="2119" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">V_ADC</text>
+<text x="42" y="2138" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 16</text>
+<text x="92" y="2138" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO10</text>
+<rect x="198" y="2125" width="120" height="17" rx="8" fill="#1d6fd6"/>
+<text x="258.0" y="2138" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VB_MON</text>
+<text x="42" y="2157" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 17</text>
+<text x="92" y="2157" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO11</text>
+<rect x="198" y="2144" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="258.0" y="2157" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="42" y="2176" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 18</text>
+<text x="92" y="2176" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO12</text>
+<rect x="198" y="2163" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="258.0" y="2176" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="42" y="2195" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 19</text>
+<text x="92" y="2195" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO13</text>
+<rect x="198" y="2182" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="258.0" y="2195" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="42" y="2214" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 20</text>
+<text x="92" y="2214" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO14</text>
+<rect x="198" y="2201" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="258.0" y="2214" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="42" y="2233" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 21</text>
+<text x="92" y="2233" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">5V</text>
+<rect x="198" y="2220" width="120" height="17" rx="8" fill="#d62828"/>
+<text x="258.0" y="2233" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">+5V</text>
+<text x="42" y="2252" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 22</text>
+<text x="92" y="2252" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GND</text>
+<rect x="198" y="2239" width="120" height="17" rx="8" fill="#222222"/>
+<text x="258.0" y="2252" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">GND</text>
+<rect x="346" y="1795" width="300" height="472" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="358" y="1815" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">J4  ·  DevKit J3 (GND..GND)</text>
+<text x="358" y="1832" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">Female header 1x22 2.54mm</text>
+<text x="358" y="1853" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<text x="408" y="1853" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GND</text>
+<rect x="514" y="1840" width="120" height="17" rx="8" fill="#222222"/>
+<text x="574.0" y="1853" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">GND</text>
+<text x="358" y="1872" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<text x="408" y="1872" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">TX (43)</text>
+<rect x="514" y="1859" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="574.0" y="1872" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="358" y="1891" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 3</text>
+<text x="408" y="1891" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">RX (44)</text>
+<rect x="514" y="1878" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="574.0" y="1891" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="358" y="1910" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 4</text>
+<text x="408" y="1910" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO1</text>
+<rect x="514" y="1897" width="120" height="17" rx="8" fill="#e07b00"/>
+<text x="574.0" y="1910" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT1_ADC</text>
+<text x="358" y="1929" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 5</text>
+<text x="408" y="1929" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO2</text>
+<rect x="514" y="1916" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="574.0" y="1929" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="358" y="1948" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 6</text>
+<text x="408" y="1948" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO42</text>
+<rect x="514" y="1935" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="574.0" y="1948" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="358" y="1967" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 7</text>
+<text x="408" y="1967" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO41</text>
+<rect x="514" y="1954" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="574.0" y="1967" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="358" y="1986" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 8</text>
+<text x="408" y="1986" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO40</text>
+<rect x="514" y="1973" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="574.0" y="1986" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="358" y="2005" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 9</text>
+<text x="408" y="2005" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO39</text>
+<rect x="514" y="1992" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="574.0" y="2005" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="358" y="2024" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 10</text>
+<text x="408" y="2024" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO38</text>
+<rect x="514" y="2011" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="574.0" y="2024" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="358" y="2043" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 11</text>
+<text x="408" y="2043" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO37</text>
+<rect x="514" y="2030" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="574.0" y="2043" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="358" y="2062" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 12</text>
+<text x="408" y="2062" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO36</text>
+<rect x="514" y="2049" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="574.0" y="2062" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="358" y="2081" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 13</text>
+<text x="408" y="2081" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO35</text>
+<rect x="514" y="2068" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="574.0" y="2081" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="358" y="2100" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 14</text>
+<text x="408" y="2100" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO0</text>
+<rect x="514" y="2087" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="574.0" y="2100" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="358" y="2119" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 15</text>
+<text x="408" y="2119" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO45</text>
+<rect x="514" y="2106" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="574.0" y="2119" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="358" y="2138" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 16</text>
+<text x="408" y="2138" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO48</text>
+<rect x="514" y="2125" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="574.0" y="2138" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="358" y="2157" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 17</text>
+<text x="408" y="2157" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO47</text>
+<rect x="514" y="2144" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="574.0" y="2157" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="358" y="2176" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 18</text>
+<text x="408" y="2176" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO21</text>
+<rect x="514" y="2163" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="574.0" y="2176" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="358" y="2195" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 19</text>
+<text x="408" y="2195" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO20</text>
+<rect x="514" y="2182" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="574.0" y="2195" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="358" y="2214" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 20</text>
+<text x="408" y="2214" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GPIO19</text>
+<rect x="514" y="2201" width="120" height="17" rx="8" fill="#9aa5b1"/>
+<text x="574.0" y="2214" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">no connect</text>
+<text x="358" y="2233" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 21</text>
+<text x="408" y="2233" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GND</text>
+<rect x="514" y="2220" width="120" height="17" rx="8" fill="#222222"/>
+<text x="574.0" y="2233" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">GND</text>
+<text x="358" y="2252" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 22</text>
+<text x="408" y="2252" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GND</text>
+<rect x="514" y="2239" width="120" height="17" rx="8" fill="#222222"/>
+<text x="574.0" y="2252" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">GND</text>
+<rect x="662" y="1795" width="300" height="130" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="674" y="1815" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">J6  ·  I2C OLED</text>
+<text x="674" y="1832" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">Pin header 1x04 2.54mm</text>
+<text x="674" y="1853" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 1</text>
+<text x="724" y="1853" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">GND</text>
+<rect x="830" y="1840" width="120" height="17" rx="8" fill="#222222"/>
+<text x="890.0" y="1853" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">GND</text>
+<text x="674" y="1872" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 2</text>
+<text x="724" y="1872" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">VCC</text>
+<rect x="830" y="1859" width="120" height="17" rx="8" fill="#d62828"/>
+<text x="890.0" y="1872" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">+3V3</text>
+<text x="674" y="1891" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 3</text>
+<text x="724" y="1891" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">SCL</text>
+<rect x="830" y="1878" width="120" height="17" rx="8" fill="#4a5a6a"/>
+<text x="890.0" y="1891" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">I2C_SCL</text>
+<text x="674" y="1910" font-size="12" fill="#3d4b59" font-weight="600" text-anchor="start">pin 4</text>
+<text x="724" y="1910" font-size="11.5" fill="#5b6b7b" font-weight="400" text-anchor="start">SDA</text>
+<rect x="830" y="1897" width="120" height="17" rx="8" fill="#4a5a6a"/>
+<text x="890.0" y="1910" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">I2C_SDA</text>
+<text x="30" y="2309" font-size="20" fill="#1b2733" font-weight="700" text-anchor="start">6 · Mounting holes</text>
+<text x="30" y="2333" font-size="13" fill="#8a4b00" font-weight="400" text-anchor="start" font-style="italic">M3 holes, no copper. H1 is inside the mains area: plastic screw.</text>
+<rect x="30" y="2351" width="300" height="73" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="42" y="2371" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">H1  ·  M3</text>
+<text x="42" y="2388" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">M3 hole 3.2mm</text>
+<text x="42" y="2409" font-size="12" fill="#5b6b7b" font-weight="400" text-anchor="start" font-style="italic">no electrical pins</text>
+<rect x="346" y="2351" width="300" height="73" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="358" y="2371" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">H2  ·  M3</text>
+<text x="358" y="2388" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">M3 hole 3.2mm</text>
+<text x="358" y="2409" font-size="12" fill="#5b6b7b" font-weight="400" text-anchor="start" font-style="italic">no electrical pins</text>
+<rect x="662" y="2351" width="300" height="73" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="674" y="2371" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">H3  ·  M3</text>
+<text x="674" y="2388" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">M3 hole 3.2mm</text>
+<text x="674" y="2409" font-size="12" fill="#5b6b7b" font-weight="400" text-anchor="start" font-style="italic">no electrical pins</text>
+<rect x="978" y="2351" width="300" height="73" rx="8" fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5"/>
+<text x="990" y="2371" font-size="14.5" fill="#1b2733" font-weight="700" text-anchor="start">H4  ·  M3</text>
+<text x="990" y="2388" font-size="11" fill="#5b6b7b" font-weight="400" text-anchor="start">M3 hole 3.2mm</text>
+<text x="990" y="2409" font-size="12" fill="#5b6b7b" font-weight="400" text-anchor="start" font-style="italic">no electrical pins</text>
+<text x="30" y="2466" font-size="20" fill="#1b2733" font-weight="700" text-anchor="start">7 · Full net list (check every net in EasyEDA's Design Manager against this)</text>
+<rect x="30.0" y="2487" width="104" height="17" rx="8" fill="#b3261e"/>
+<text x="82.0" y="2500" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">AC_L</text>
+<text x="144.0" y="2500" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">F2.1, J5.1</text>
+<rect x="30.0" y="2511" width="104" height="17" rx="8" fill="#b3261e"/>
+<text x="82.0" y="2524" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">AC_LF</text>
+<text x="144.0" y="2524" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">F2.2, R41.1, RV1.1</text>
+<rect x="30.0" y="2535" width="104" height="17" rx="8" fill="#b3261e"/>
+<text x="82.0" y="2548" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">AC_M1</text>
+<text x="144.0" y="2548" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">R41.2, R42.1</text>
+<rect x="30.0" y="2559" width="104" height="17" rx="8" fill="#b3261e"/>
+<text x="82.0" y="2572" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">AC_M2</text>
+<text x="144.0" y="2572" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">R42.2, R43.1</text>
+<rect x="30.0" y="2583" width="104" height="17" rx="8" fill="#b3261e"/>
+<text x="82.0" y="2596" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">AC_M3</text>
+<text x="144.0" y="2596" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">R43.2, R44.1</text>
+<rect x="30.0" y="2607" width="104" height="17" rx="8" fill="#b3261e"/>
+<text x="82.0" y="2620" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">AC_N</text>
+<text x="144.0" y="2620" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">J5.2, T1.2, RV1.2</text>
+<rect x="30.0" y="2631" width="104" height="17" rx="8" fill="#b3261e"/>
+<text x="82.0" y="2644" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">AC_ZP</text>
+<text x="144.0" y="2644" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">T1.1, R44.2</text>
+<rect x="30.0" y="2655" width="104" height="17" rx="8" fill="#d62828"/>
+<text x="82.0" y="2668" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">+3V3</text>
+<text x="144.0" y="2668" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">J3.1, J3.2, J6.2, FB1.1</text>
+<rect x="30.0" y="2679" width="104" height="17" rx="8" fill="#d62828"/>
+<text x="82.0" y="2692" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">+3V3A</text>
+<text x="144.0" y="2692" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">C2.1, C3.1, C5.1, R3.1, U1.8, D11.2, D12.2, D13.2, D14.2, D15.2, D16.2, D41.2, FB1.2</text>
+<rect x="30.0" y="2703" width="104" height="17" rx="8" fill="#d62828"/>
+<text x="82.0" y="2716" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">+5V</text>
+<text x="144.0" y="2716" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">C1.1, D1.1, J3.21</text>
+<rect x="30.0" y="2727" width="104" height="17" rx="8" fill="#4a5a6a"/>
+<text x="82.0" y="2740" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CC1</text>
+<text x="144.0" y="2740" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">R1.1, J2.A5</text>
+<rect x="30.0" y="2751" width="104" height="17" rx="8" fill="#4a5a6a"/>
+<text x="82.0" y="2764" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CC2</text>
+<text x="144.0" y="2764" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">R2.1, J2.B5</text>
+<rect x="30.0" y="2775" width="104" height="17" rx="8" fill="#e07b00"/>
+<text x="82.0" y="2788" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT1_ADC</text>
+<text x="144.0" y="2788" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">J4.4, C11.1, D11.3, R112.2, R113.1</text>
+<rect x="30.0" y="2799" width="104" height="17" rx="8" fill="#2a9d3f"/>
+<text x="82.0" y="2812" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT1_MA</text>
+<text x="144.0" y="2812" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">JP11.2, R111.2</text>
+<rect x="30.0" y="2823" width="104" height="17" rx="8" fill="#2a9d3f"/>
+<text x="82.0" y="2836" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT1_SIG</text>
+<text x="144.0" y="2836" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">J11.T, R111.1, R112.1</text>
+<rect x="30.0" y="2847" width="104" height="17" rx="8" fill="#e07b00"/>
+<text x="82.0" y="2860" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT2_ADC</text>
+<text x="144.0" y="2860" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">J3.4, C12.1, D12.3, R122.2, R123.1</text>
+<rect x="30.0" y="2871" width="104" height="17" rx="8" fill="#2a9d3f"/>
+<text x="82.0" y="2884" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT2_MA</text>
+<text x="144.0" y="2884" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">JP12.2, R121.2</text>
+<rect x="30.0" y="2895" width="104" height="17" rx="8" fill="#2a9d3f"/>
+<text x="82.0" y="2908" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT2_SIG</text>
+<text x="144.0" y="2908" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">J12.T, R121.1, R122.1</text>
+<rect x="30.0" y="2919" width="104" height="17" rx="8" fill="#e07b00"/>
+<text x="82.0" y="2932" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT3_ADC</text>
+<text x="144.0" y="2932" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">J3.5, C13.1, D13.3, R132.2, R133.1</text>
+<rect x="30.0" y="2943" width="104" height="17" rx="8" fill="#2a9d3f"/>
+<text x="82.0" y="2956" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT3_MA</text>
+<text x="144.0" y="2956" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">JP13.2, R131.2</text>
+<rect x="30.0" y="2967" width="104" height="17" rx="8" fill="#2a9d3f"/>
+<text x="82.0" y="2980" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT3_SIG</text>
+<text x="144.0" y="2980" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">J13.T, R131.1, R132.1</text>
+<rect x="812.0" y="2487" width="104" height="17" rx="8" fill="#e07b00"/>
+<text x="864.0" y="2500" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT4_ADC</text>
+<text x="926.0" y="2500" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">J3.6, C14.1, D14.3, R142.2, R143.1</text>
+<rect x="812.0" y="2511" width="104" height="17" rx="8" fill="#2a9d3f"/>
+<text x="864.0" y="2524" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT4_MA</text>
+<text x="926.0" y="2524" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">JP14.2, R141.2</text>
+<rect x="812.0" y="2535" width="104" height="17" rx="8" fill="#2a9d3f"/>
+<text x="864.0" y="2548" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT4_SIG</text>
+<text x="926.0" y="2548" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">J14.T, R141.1, R142.1</text>
+<rect x="812.0" y="2559" width="104" height="17" rx="8" fill="#e07b00"/>
+<text x="864.0" y="2572" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT5_ADC</text>
+<text x="926.0" y="2572" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">J3.7, C15.1, D15.3, R152.2, R153.1</text>
+<rect x="812.0" y="2583" width="104" height="17" rx="8" fill="#2a9d3f"/>
+<text x="864.0" y="2596" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT5_MA</text>
+<text x="926.0" y="2596" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">JP15.2, R151.2</text>
+<rect x="812.0" y="2607" width="104" height="17" rx="8" fill="#2a9d3f"/>
+<text x="864.0" y="2620" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT5_SIG</text>
+<text x="926.0" y="2620" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">J15.T, R151.1, R152.1</text>
+<rect x="812.0" y="2631" width="104" height="17" rx="8" fill="#e07b00"/>
+<text x="864.0" y="2644" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT6_ADC</text>
+<text x="926.0" y="2644" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">C16.1, D16.3, J3.12, R162.2, R163.1</text>
+<rect x="812.0" y="2655" width="104" height="17" rx="8" fill="#2a9d3f"/>
+<text x="864.0" y="2668" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT6_MA</text>
+<text x="926.0" y="2668" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">JP16.2, R161.2</text>
+<rect x="812.0" y="2679" width="104" height="17" rx="8" fill="#2a9d3f"/>
+<text x="864.0" y="2692" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">CT6_SIG</text>
+<text x="926.0" y="2692" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">J16.T, R161.1, R162.1</text>
+<rect x="812.0" y="2703" width="104" height="17" rx="8" fill="#222222"/>
+<text x="864.0" y="2716" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">GND</text>
+<text x="926.0" y="2716" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">C1.2, C2.2, C3.2, C4.2, C5.2, C6.2, C7.2, J1.2, J4.1, J6.1, R1.2, R2.2, R4.2, U1.4</text>
+<text x="926.0" y="2733" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">C11.2, C12.2, C13.2, C14.2, C15.2, C16.2, C42.2, D11.1, D12.1, D13.1, D14.1, D15.1</text>
+<text x="926.0" y="2750" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">D16.1, D41.1, J2.SH, J3.22, J4.21, J4.22, J2.A12, J2.B12</text>
+<rect x="812.0" y="2761" width="104" height="17" rx="8" fill="#4a5a6a"/>
+<text x="864.0" y="2774" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">I2C_SCL</text>
+<text x="926.0" y="2774" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">J6.3, J3.11</text>
+<rect x="812.0" y="2785" width="104" height="17" rx="8" fill="#4a5a6a"/>
+<text x="864.0" y="2798" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">I2C_SDA</text>
+<text x="926.0" y="2798" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">J6.4, J3.10</text>
+<rect x="812.0" y="2809" width="104" height="17" rx="8" fill="#1d6fd6"/>
+<text x="864.0" y="2822" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VB</text>
+<text x="926.0" y="2822" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">C6.1, C7.1, R5.2, R6.1, T1.3, U1.5, J11.S, J12.S, J13.S, J14.S, J15.S, J16.S, JP11.1</text>
+<text x="926.0" y="2839" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">JP12.1, JP13.1, JP14.1, JP15.1, JP16.1, R113.2, R123.2, R133.2, R143.2, R153.2, R163.2</text>
+<rect x="812.0" y="2850" width="104" height="17" rx="8" fill="#1d6fd6"/>
+<text x="864.0" y="2863" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VB_DIV</text>
+<text x="926.0" y="2863" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">C4.1, R3.2, R4.1, U1.3</text>
+<rect x="812.0" y="2874" width="104" height="17" rx="8" fill="#1d6fd6"/>
+<text x="864.0" y="2887" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VB_MON</text>
+<text x="926.0" y="2887" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">R6.2, J3.16</text>
+<rect x="812.0" y="2898" width="104" height="17" rx="8" fill="#1d6fd6"/>
+<text x="864.0" y="2911" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VB_OUT</text>
+<text x="926.0" y="2911" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">R5.1, U1.1, U1.2</text>
+<rect x="812.0" y="2922" width="104" height="17" rx="8" fill="#d62828"/>
+<text x="864.0" y="2935" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VIN_F</text>
+<text x="926.0" y="2935" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">D1.2, F1.2</text>
+<rect x="812.0" y="2946" width="104" height="17" rx="8" fill="#d62828"/>
+<text x="864.0" y="2959" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">VIN_RAW</text>
+<text x="926.0" y="2959" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">F1.1, J1.1, J2.A9, J2.B9</text>
+<rect x="812.0" y="2970" width="104" height="17" rx="8" fill="#7b2cbf"/>
+<text x="864.0" y="2983" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">V_ADC</text>
+<text x="926.0" y="2983" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">C42.1, D41.3, J3.15, R48.2</text>
+<rect x="812.0" y="2994" width="104" height="17" rx="8" fill="#7b2cbf"/>
+<text x="864.0" y="3007" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">V_OUT</text>
+<text x="926.0" y="3007" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">U1.7, C41.2, R47.2, R48.1</text>
+<rect x="812.0" y="3018" width="104" height="17" rx="8" fill="#7b2cbf"/>
+<text x="864.0" y="3031" font-size="11.5" fill="#ffffff" font-weight="700" text-anchor="middle">ZS_A</text>
+<text x="926.0" y="3031" font-size="12" fill="#1b2733" font-weight="400" text-anchor="start">T1.4, U1.6, C41.1, R47.1</text>
+<text x="30" y="3085" font-size="13.5" fill="#a33b00" font-weight="700" text-anchor="start">Order check before sending to JLCPCB: DevKit row spacing &amp; pinout · ZMPT101B pin grid 10.0 × 12.7 mm · screw-terminal wire entry · 6.5 mm mains creepage + slot · run EasyEDA DRC.</text>
+</svg>

@@ -1,0 +1,11 @@
+(version 1)
+# Mains (230 V) nets are named AC_*. Keep them away from all low-voltage copper.
+(rule "mains_to_lv_clearance"
+	(condition "A.hasNetclass('Mains') && !B.hasNetclass('Mains')")
+	(constraint clearance (min 6.5mm)))
+(rule "mains_to_lv_creepage"
+	(condition "A.hasNetclass('Mains') && !B.hasNetclass('Mains')")
+	(constraint creepage (min 6.5mm)))
+(rule "mains_hole_clearance"
+	(condition "A.hasNetclass('Mains')")
+	(constraint hole_clearance (min 1.0mm)))

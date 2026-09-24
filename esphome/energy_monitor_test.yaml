@@ -1,0 +1,380 @@
+# =============================================================================
+# ESP32-S3 single-channel SCT-013-000 CT signal test
+# -----------------------------------------------------------------------------
+# TEST / CALIBRATION FIRMWARE ONLY. This is NOT a certified or accurate energy
+# meter. The ESP32 ADC is noisy and non-linear; the "estimated current" is a
+# theoretical conversion until you calibrate it against a trusted meter.
+#
+# Board detected: ESP32-S3 (QFN56) rev v0.2, 16 MB flash, 8 MB PSRAM,
+#                 native USB-Serial/JTAG.
+# Tested with ESPHome 2026.8.2 (esp-idf framework).
+# =============================================================================
+
+substitutions:
+  device_name: ct-energy-test
+  friendly_name: CT Energy Test
+
+  # --- ADC input -------------------------------------------------------------
+  # GPIO NUMBER ONLY (e.g. "4" = GPIO4). Must be an ADC1 pin: on the ESP32-S3
+  # that is GPIO1..GPIO10. Do NOT use ADC2 pins (GPIO11..20): ADC2 is shared
+  # with Wi-Fi. Avoid GPIO3 (strapping pin).
+  ct_gpio: "1"
+
+  # --- Mains / sampling window -----------------------------------------------
+  mains_frequency_hz: "50"     # India: 50 Hz. Change to 60 for 60 Hz grids.
+  sample_cycles: "10"          # Whole AC cycles per window (10 @ 50 Hz = 200 ms)
+  samples_per_cycle: "40"      # 40 x 50 Hz = 2000 samples/s. Max total 2000.
+  sample_interval: 5s          # How often a window is captured and published
+
+  # --- Initial (theoretical) CT conversion values ------------------------------
+  # These only seed the Home Assistant "number" entities below; the calculation
+  # itself reads the live values, which you can change from HA at any time.
+  # Current test CT: SCT-013-030 (30 A / 1 V, burden built in, NO external
+  # burden). Burden=1, secondary=1, primary=30  ->  amps = RMS volts x 30.
+  # For SCT-013-000 (100 A / 50 mA) with an external 18 Ω burden use 18 / 100 / 0.05.
+  burden_resistance_ohm: "1"
+  ct_primary_current_a: "30"
+  ct_secondary_current_a: "1"
+  calibration_factor: "1.0"
+
+esphome:
+  name: ${device_name}
+  friendly_name: ${friendly_name}
+  comment: "Single-channel SCT-013-000 test firmware (NOT a certified meter)"
+
+esp32:
+  board: esp32-s3-devkitc-1
+  variant: esp32s3
+  flash_size: 16MB
+  framework:
+    type: esp-idf
+
+logger:
+  level: INFO
+
+api:
+  encryption:
+    key: !secret ct_test_api_key
+
+ota:
+  - platform: esphome
+    password: !secret ct_test_ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  # Many ESP32-S3 dev boards fail the Wi-Fi handshake ("Auth Expired") at the
+  # default 20 dBm TX power even with a strong signal; 8.5 dB is the usual fix.
+  output_power: 8.5dB
+  ap:
+    ssid: "CT-Energy-Test Fallback"
+    password: !secret ct_test_ap_password
+
+captive_portal:
+
+# -----------------------------------------------------------------------------
+# Live calibration values (editable in Home Assistant, restored after reboot)
+# -----------------------------------------------------------------------------
+number:
+  - platform: template
+    id: burden_resistance
+    name: "CT Burden Resistance"
+    icon: mdi:resistor
+    unit_of_measurement: "Ω"
+    entity_category: config
+    mode: box
+    optimistic: true
+    restore_value: true
+    initial_value: ${burden_resistance_ohm}
+    min_value: 1
+    max_value: 1000
+    step: 0.01
+
+  - platform: template
+    id: ct_primary_current
+    name: "CT Rated Primary Current"
+    icon: mdi:current-ac
+    unit_of_measurement: "A"
+    entity_category: config
+    mode: box
+    optimistic: true
+    restore_value: true
+    initial_value: ${ct_primary_current_a}
+    min_value: 1
+    max_value: 1000
+    step: 0.1
+
+  - platform: template
+    id: ct_secondary_current
+    name: "CT Rated Secondary Current"
+    icon: mdi:current-ac
+    unit_of_measurement: "A"
+    entity_category: config
+    mode: box
+    optimistic: true
+    restore_value: true
+    initial_value: ${ct_secondary_current_a}
+    min_value: 0.001
+    max_value: 5
+    step: 0.001
+
+  - platform: template
+    id: calibration_factor
+    name: "CT Calibration Factor"
+    icon: mdi:tune-variant
+    entity_category: config
+    mode: box
+    optimistic: true
+    restore_value: true
+    initial_value: ${calibration_factor}
+    min_value: 0.5
+    max_value: 2.0
+    step: 0.0001
+
+switch:
+  - platform: template
+    id: current_estimate_enabled
+    name: "CT Current Estimate Enabled"
+    icon: mdi:calculator-variant
+    entity_category: config
+    optimistic: true
+    restore_mode: RESTORE_DEFAULT_OFF
+
+button:
+  - platform: restart
+    name: "Restart"
+
+# -----------------------------------------------------------------------------
+# Sensors
+# -----------------------------------------------------------------------------
+sensor:
+  # Underlying ADC channel. Never polled on its own: the sampling interval
+  # below calls sample() on it at a fixed rate. raw: true -> 12-bit counts.
+  - platform: adc
+    id: ct_adc_raw
+    internal: true
+    pin: GPIO${ct_gpio}
+    attenuation: 12db     # ~0..3.1 V usable range on ESP32-S3
+    raw: true
+    samples: 1
+    update_interval: never
+
+  - platform: template
+    id: ct_raw_adc
+    name: "CT Raw ADC"
+    icon: mdi:numeric
+    accuracy_decimals: 0
+    state_class: measurement
+    update_interval: never
+
+  - platform: template
+    id: ct_adc_voltage
+    name: "CT ADC Voltage"
+    unit_of_measurement: "V"
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 3
+    update_interval: never
+
+  - platform: template
+    id: ct_bias_voltage
+    name: "CT Bias Voltage"
+    unit_of_measurement: "V"
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 3
+    update_interval: never
+
+  - platform: template
+    id: ct_minimum
+    name: "CT Minimum"
+    icon: mdi:arrow-collapse-down
+    accuracy_decimals: 0
+    state_class: measurement
+    update_interval: never
+
+  - platform: template
+    id: ct_maximum
+    name: "CT Maximum"
+    icon: mdi:arrow-collapse-up
+    accuracy_decimals: 0
+    state_class: measurement
+    update_interval: never
+
+  - platform: template
+    id: ct_peak_to_peak
+    name: "CT Peak-to-Peak"
+    unit_of_measurement: "V"
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 3
+    update_interval: never
+
+  - platform: template
+    id: ct_ac_rms
+    name: "CT AC RMS"
+    unit_of_measurement: "V"
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 4
+    update_interval: never
+
+  - platform: template
+    id: ct_secondary_current_ma
+    name: "CT Secondary Current (estimated)"
+    unit_of_measurement: "mA"
+    device_class: current
+    state_class: measurement
+    accuracy_decimals: 2
+    update_interval: never
+
+  - platform: template
+    id: ct_primary_current_est
+    name: "CT Primary Current (estimated)"
+    unit_of_measurement: "A"
+    device_class: current
+    state_class: measurement
+    accuracy_decimals: 2
+    update_interval: never
+
+  # Diagnostics
+  - platform: template
+    id: ct_clipped_samples
+    name: "CT Clipped Samples"
+    icon: mdi:alert-octagon-outline
+    entity_category: diagnostic
+    accuracy_decimals: 0
+    state_class: measurement
+    update_interval: never
+
+  - platform: template
+    id: ct_sample_rate
+    name: "CT Actual Sample Rate"
+    unit_of_measurement: "Hz"
+    entity_category: diagnostic
+    accuracy_decimals: 0
+    update_interval: never
+
+  - platform: wifi_signal
+    name: "WiFi Signal"
+    update_interval: 60s
+
+  - platform: uptime
+    name: "Uptime"
+    update_interval: 60s
+
+text_sensor:
+  - platform: template
+    id: ct_calibration_scheme
+    name: "CT ADC Calibration"
+    entity_category: diagnostic
+    update_interval: never
+
+# -----------------------------------------------------------------------------
+# Sampling window: capture whole AC cycles, remove DC bias, compute true RMS.
+# Blocks the main loop for ~sample_cycles/frequency (200 ms by default), so
+# ESPHome will log a "took a long time" warning. That is expected for this test.
+# -----------------------------------------------------------------------------
+interval:
+  - interval: ${sample_interval}
+    then:
+      - lambda: |-
+          static constexpr int MAX_SAMPLES = 2000;
+          static uint16_t raw_buf[MAX_SAMPLES];
+          static adc_cali_handle_t cali = nullptr;
+          static bool cali_init_done = false;
+
+          // --- One-time: ESP-IDF curve-fitting calibration (handles ADC non-linearity)
+          if (!cali_init_done) {
+            cali_init_done = true;
+            adc_unit_t unit;
+            adc_channel_t chan;
+            if (adc_oneshot_io_to_channel(${ct_gpio}, &unit, &chan) == ESP_OK) {
+              adc_cali_curve_fitting_config_t cfg = {};
+              cfg.unit_id = unit;
+              cfg.chan = chan;
+              cfg.atten = ADC_ATTEN_DB_12;
+              cfg.bitwidth = ADC_BITWIDTH_DEFAULT;
+              if (adc_cali_create_scheme_curve_fitting(&cfg, &cali) != ESP_OK) cali = nullptr;
+            }
+            id(ct_calibration_scheme).publish_state(
+                cali ? "eFuse curve fitting" : "UNCALIBRATED (linear 3.3V/4095 fallback)");
+          }
+
+          auto to_volts = [&](int raw) -> float {
+            if (cali != nullptr) {
+              int mv;
+              if (adc_cali_raw_to_voltage(cali, raw, &mv) == ESP_OK) return mv / 1000.0f;
+            }
+            return raw * 3.3f / 4095.0f;
+          };
+
+          // --- Capture a window of whole cycles at a fixed sample period
+          const float freq = ${mains_frequency_hz};
+          const int per_cycle = ${samples_per_cycle};
+          int n = ${sample_cycles} * per_cycle;
+          if (n > MAX_SAMPLES) n = MAX_SAMPLES;
+          if (n < 2) return;
+          const uint32_t period_us = (uint32_t) (1000000.0f / (freq * per_cycle));
+
+          const uint32_t t_start = micros();
+          uint32_t t_next = t_start;
+          for (int i = 0; i < n; i++) {
+            while ((int32_t) (micros() - t_next) < 0) {}
+            raw_buf[i] = (uint16_t) id(ct_adc_raw).sample();
+            t_next += period_us;
+          }
+          const uint32_t elapsed_us = micros() - t_start;
+
+          // --- Pass 1: DC bias (mean), min/max, clipping
+          int raw_min = 4095, raw_max = 0, clipped = 0;
+          float v_min = 99.0f, v_max = -99.0f;
+          double sum_v = 0;
+          for (int i = 0; i < n; i++) {
+            const int r = raw_buf[i];
+            const float v = to_volts(r);
+            sum_v += v;
+            if (r < raw_min) raw_min = r;
+            if (r > raw_max) raw_max = r;
+            if (v < v_min) v_min = v;
+            if (v > v_max) v_max = v;
+            if (r <= 5 || r >= 4090) clipped++;
+          }
+          const float bias_v = sum_v / n;
+
+          // --- Pass 2: RMS of the AC component (DC bias removed)
+          double sum_sq = 0;
+          for (int i = 0; i < n; i++) {
+            const double ac = to_volts(raw_buf[i]) - bias_v;
+            sum_sq += ac * ac;
+          }
+          const float ac_rms_v = sqrt(sum_sq / n);
+
+          // --- Publish raw signal diagnostics
+          id(ct_raw_adc).publish_state(raw_buf[n - 1]);
+          id(ct_adc_voltage).publish_state(to_volts(raw_buf[n - 1]));
+          id(ct_bias_voltage).publish_state(bias_v);
+          id(ct_minimum).publish_state(raw_min);
+          id(ct_maximum).publish_state(raw_max);
+          id(ct_peak_to_peak).publish_state(v_max - v_min);
+          id(ct_ac_rms).publish_state(ac_rms_v);
+          id(ct_clipped_samples).publish_state(clipped);
+          id(ct_sample_rate).publish_state(elapsed_us > 0 ? n * 1e6f / elapsed_us : NAN);
+
+          // --- Optional theoretical current conversion
+          //     secondary = burden_rms / R_burden ; primary = secondary * (Ip/Is) * cal
+          const float r_burden = id(burden_resistance).state;
+          const float i_pri = id(ct_primary_current).state;
+          const float i_sec = id(ct_secondary_current).state;
+          const float cal = id(calibration_factor).state;
+          if (id(current_estimate_enabled).state && r_burden > 0 && i_sec > 0) {
+            const float sec_a = ac_rms_v / r_burden;
+            id(ct_secondary_current_ma).publish_state(sec_a * 1000.0f);
+            id(ct_primary_current_est).publish_state(sec_a * (i_pri / i_sec) * cal);
+          } else {
+            id(ct_secondary_current_ma).publish_state(NAN);
+            id(ct_primary_current_est).publish_state(NAN);
+          }
+
+          ESP_LOGI("ct", "n=%d %.0fHz bias=%.3fV raw[%d..%d] pp=%.3fV rms=%.4fV clip=%d",
+                   n, n * 1e6f / elapsed_us, bias_v, raw_min, raw_max, v_max - v_min, ac_rms_v, clipped);

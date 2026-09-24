@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 980" width="1200" height="980" font-family="Segoe UI, Arial, sans-serif">
+
+  <rect width="1200" height="980" fill="#ffffff"/>
+  <text x="30" y="42" font-size="26" font-weight="700" fill="#1b2733">CT energy monitor: breadboard test wiring (1 channel)</text>
+  <text x="30" y="68" font-size="15" fill="#4a5a6a">Same values as the CT6 PCB schematic. Build this for CT1, then repeat the green/orange part for CT2 to CT6 (all share one BIAS).</text>
+
+  <!-- ===================== rails ===================== -->
+  <polyline stroke="#d62828" stroke-width="4" fill="none" points="150,110 930,110 930,130 952,130"/>
+  <text x="160" y="100" font-size="15" font-weight="600" fill="#d62828">3V3 rail</text>
+  <polyline stroke="#222222" stroke-width="4" fill="none" points="150,640 930,640 930,610 952,610"/>
+  <text x="160" y="665" font-size="15" font-weight="600" fill="#1b2733">GND rail</text>
+
+  <!-- ===================== bias divider ===================== -->
+  <line stroke="#d62828" stroke-width="4" fill="none" x1="200" y1="110" x2="200" y2="140"/>
+  <rect fill="#f3e2b3" stroke="#6b5518" stroke-width="2" x="185" y="140" width="30" height="80" rx="4"/>
+  <text x="225" y="175" font-size="15" font-weight="600" fill="#1b2733">R1 10 kΩ</text>
+  <line stroke="#1d6fd6" stroke-width="4" fill="none" x1="200" y1="220" x2="200" y2="330"/>
+  <rect fill="#f3e2b3" stroke="#6b5518" stroke-width="2" x="185" y="330" width="30" height="80" rx="4"/>
+  <text x="100" y="375" font-size="15" font-weight="600" fill="#1b2733">R2 10 kΩ</text>
+  <line stroke="#222222" stroke-width="4" fill="none" x1="200" y1="410" x2="200" y2="640"/>
+  <!-- bias node -->
+  <polyline stroke="#1d6fd6" stroke-width="4" fill="none" points="200,260 780,260 780,290"/>
+  <circle cx="200" cy="260" r="7" fill="#1d6fd6" stroke="none"/>
+  <text x="120" y="252" font-size="15" font-weight="600" fill="#1d6fd6">BIAS</text>
+  <text x="96" y="272" font-size="12.5" fill="#3d4b59">≈ 1.65 V</text>
+  <!-- 10uF -->
+  <polyline stroke="#1d6fd6" stroke-width="4" fill="none" points="260,260 260,450"/>
+  <line x1="238" y1="450" x2="282" y2="450" stroke="#1b2733" stroke-width="4"/>
+  <line x1="238" y1="462" x2="282" y2="462" stroke="#1b2733" stroke-width="4"/>
+  <line stroke="#222222" stroke-width="4" fill="none" x1="260" y1="462" x2="260" y2="640"/>
+  <text x="40" y="455" font-size="15" font-weight="600" fill="#1b2733">C1 10 µF</text>
+  <text x="40" y="473" font-size="12.5" fill="#3d4b59">(+ to BIAS, − to GND)</text>
+  <circle cx="260" cy="260" r="6" fill="#1d6fd6" stroke="none"/>
+
+  <!-- ===================== CT jack ===================== -->
+  <rect x="330" y="340" width="130" height="150" rx="10" fill="#e9eef5" stroke="#5b6b7b" stroke-width="2"/>
+  <text x="344" y="368" font-size="15" font-weight="600" fill="#1b2733">CT 3.5 mm</text>
+  <text x="344" y="387" font-size="12.5" fill="#3d4b59">jack / plug</text>
+  <text x="344" y="440" font-size="12.5" fill="#3d4b59">SCT-013</text>
+  <!-- tip pin (right) -->
+  <circle cx="460" cy="400" r="6" fill="#2a9d3f"/>
+  <text x="470" y="395" font-size="15" font-weight="600" fill="#2a9d3f">TIP</text>
+  <!-- sleeve pin (left) -->
+  <circle cx="330" cy="470" r="6" fill="#1d6fd6"/>
+  <text x="338" y="476" font-size="15" font-weight="600" fill="#1d6fd6">SLEEVE</text>
+  <!-- sleeve to bias -->
+  <polyline stroke="#1d6fd6" stroke-width="4" fill="none" points="330,470 315,470 315,560"/>
+  <polyline stroke="#1d6fd6" stroke-width="4" fill="none" points="315,470 315,260"/>
+  <circle cx="315" cy="260" r="6" fill="#1d6fd6" stroke="none"/>
+  <text x="338" y="510" font-size="12.5" fill="#3d4b59">Ring: not used</text>
+
+  <!-- ===================== tip -> 1k -> ADC node ===================== -->
+  <polyline stroke="#2a9d3f" stroke-width="4" fill="none" points="460,400 600,400"/>
+  <rect fill="#f3e2b3" stroke="#6b5518" stroke-width="2" x="600" y="385" width="90" height="30" rx="4"/>
+  <text x="610" y="375" font-size="15" font-weight="600" fill="#1b2733">R3 1 kΩ</text>
+  <polyline stroke="#e07b00" stroke-width="4" fill="none" points="690,400 952,400"/>
+  <circle cx="780" cy="400" r="7" fill="#e07b00"/>
+  <circle cx="860" cy="400" r="7" fill="#e07b00"/>
+  <text x="700" y="440" font-size="15" font-weight="600" fill="#e07b00">ADC node</text>
+
+  <!-- burden 22R between TIP and SLEEVE -->
+  <polyline stroke="#2a9d3f" stroke-width="4" fill="none" points="540,400 540,450"/>
+  <circle cx="540" cy="400" r="6" fill="#2a9d3f"/>
+  <rect fill="#ffd6d6" stroke="#b01e1e" stroke-width="2.5" x="525" y="450" width="30" height="80" rx="4"/>
+  <polyline stroke="#1d6fd6" stroke-width="4" fill="none" points="540,530 540,560 315,560"/>
+  <text x="565" y="478" font-size="15" font-weight="600" fill="#b01e1e">R_B 22 Ω burden</text>
+  <text x="565" y="497" font-size="13" fill="#8a4b00" font-style="italic">only for 100A/50mA CT</text>
+  <text x="565" y="514" font-size="13" fill="#8a4b00" font-style="italic">(20 Ω = 10+10, or 18 Ω OK)</text>
+  <text x="565" y="531" font-size="13" fill="#8a4b00" font-style="italic">REMOVE for 30A/1V CT</text>
+
+  <!-- 1k8 from ADC node up to BIAS -->
+  <line stroke="#e07b00" stroke-width="4" fill="none" x1="780" y1="400" x2="780" y2="370"/>
+  <rect fill="#f3e2b3" stroke="#6b5518" stroke-width="2" x="765" y="290" width="30" height="80" rx="4"/>
+  <text x="620" y="320" font-size="15" font-weight="600" fill="#1b2733">R4 1.8 kΩ</text>
+  <text x="620" y="338" font-size="12.5" fill="#3d4b59">(2.2 kΩ is OK)</text>
+
+  <!-- 100nF from ADC node to GND -->
+  <line stroke="#e07b00" stroke-width="4" fill="none" x1="860" y1="400" x2="860" y2="520"/>
+  <line x1="838" y1="520" x2="882" y2="520" stroke="#1b2733" stroke-width="4"/>
+  <line x1="838" y1="532" x2="882" y2="532" stroke="#1b2733" stroke-width="4"/>
+  <line stroke="#222222" stroke-width="4" fill="none" x1="860" y1="532" x2="860" y2="640"/>
+  <text x="870" y="560" font-size="15" font-weight="600" fill="#1b2733">C2 100 nF</text>
+
+  <!-- ===================== ESP32-S3 ===================== -->
+  <rect x="952" y="90" width="200" height="570" rx="12" fill="#20303f" stroke="#0d161f" stroke-width="2"/>
+  <text x="972" y="122" font-size="16" font-weight="700" fill="#ffffff">ESP32-S3</text>
+  <text x="972" y="142" font-size="13" fill="#b9c7d4">DevKit N16R8</text>
+  <circle cx="952" cy="130" r="7" fill="#d62828"/>
+  <text x="966" y="175" font-size="15" font-weight="600" fill="#ff8a8a">3V3</text>
+  <circle cx="952" cy="400" r="7" fill="#e07b00"/>
+  <text x="966" y="395" font-size="15" font-weight="700" fill="#ffc07a">GPIO1</text>
+  <text x="966" y="414" font-size="12" fill="#b9c7d4">CT1 (ADC1)</text>
+  <circle cx="952" cy="610" r="7" fill="#aaa"/>
+  <text x="966" y="605" font-size="15" font-weight="600" fill="#dddddd">GND</text>
+  <text x="966" y="460" font-size="12" fill="#b9c7d4">More CTs later:</text>
+  <text x="966" y="478" font-size="12" fill="#b9c7d4">CT2 GPIO4 · CT3 GPIO5</text>
+  <text x="966" y="496" font-size="12" fill="#b9c7d4">CT4 GPIO6 · CT5 GPIO7</text>
+  <text x="966" y="514" font-size="12" fill="#b9c7d4">CT6 GPIO8</text>
+  <text x="966" y="532" font-size="12" fill="#b9c7d4">Voltage (ZMPT) GPIO9</text>
+  <text x="966" y="550" font-size="12" fill="#b9c7d4">Bias monitor GPIO10</text>
+
+  <!-- ===================== legend ===================== -->
+  <g transform="translate(30,700)">
+    <rect fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5" width="1140" height="46" rx="8"/>
+    <line stroke="#d62828" stroke-width="4" fill="none" x1="20" y1="23" x2="60" y2="23"/><text x="68" y="28" font-size="14" fill="#1b2733">3V3</text>
+    <line stroke="#222222" stroke-width="4" fill="none" x1="130" y1="23" x2="170" y2="23"/><text x="178" y="28" font-size="14" fill="#1b2733">GND</text>
+    <line stroke="#1d6fd6" stroke-width="4" fill="none" x1="240" y1="23" x2="280" y2="23"/><text x="288" y="28" font-size="14" fill="#1b2733">BIAS ≈1.65 V</text>
+    <line stroke="#2a9d3f" stroke-width="4" fill="none" x1="400" y1="23" x2="440" y2="23"/><text x="448" y="28" font-size="14" fill="#1b2733">CT signal (tip)</text>
+    <line stroke="#e07b00" stroke-width="4" fill="none" x1="580" y1="23" x2="620" y2="23"/><text x="628" y="28" font-size="14" fill="#1b2733">To ADC pin</text>
+    <text x="760" y="28" font-size="12.5" fill="#3d4b59">Dots = connection points on the breadboard</text>
+  </g>
+
+  <!-- ===================== info boxes ===================== -->
+  <g transform="translate(30,760)">
+    <rect fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5" width="370" height="200" rx="8"/>
+    <text x="16" y="28" font-size="15" font-weight="600" fill="#1b2733">Parts (1 channel)</text>
+    <text x="16" y="54" font-size="14" fill="#1b2733">R1, R2: 10 kΩ (bias, shared)</text>
+    <text x="16" y="76" font-size="14" fill="#1b2733">C1: 10 µF (bias, shared)</text>
+    <text x="16" y="98" font-size="14" fill="#1b2733">R_B: 22 Ω burden (100 A CT only)</text>
+    <text x="16" y="120" font-size="14" fill="#1b2733">R3: 1 kΩ   ·   R4: 1.8 kΩ</text>
+    <text x="16" y="142" font-size="14" fill="#1b2733">C2: 100 nF</text>
+    <text x="16" y="168" font-size="12.5" fill="#3d4b59">Optional clamp: BAT54S (or 2 × 1N5819)</text>
+    <text x="16" y="186" font-size="12.5" fill="#3d4b59">from ADC node to GND and to 3V3</text>
+  </g>
+  <g transform="translate(415,760)">
+    <rect fill="#f7f9fb" stroke="#b8c4d0" stroke-width="1.5" width="370" height="200" rx="8"/>
+    <text x="16" y="28" font-size="15" font-weight="600" fill="#1b2733">Home Assistant settings</text>
+    <text x="16" y="54" font-size="14" fill="#1b2733">100A/50mA CT: Burden 22, Sec 0.05,</text>
+    <text x="16" y="74" font-size="14" fill="#1b2733">      Primary 100, Calibration 1.555</text>
+    <text x="16" y="100" font-size="14" fill="#1b2733">30A/1V CT: Burden 1, Sec 1,</text>
+    <text x="16" y="120" font-size="14" fill="#1b2733">      Primary 30, Calibration 1.555</text>
+    <text x="16" y="148" font-size="12.5" fill="#3d4b59">1.555 undoes the 1k/1.8k divider (×0.643).</text>
+    <text x="16" y="166" font-size="12.5" fill="#3d4b59">With 2.2 kΩ for R4, use 1.455 instead.</text>
+    <text x="16" y="184" font-size="12.5" fill="#3d4b59">Turn ON "CT Current Estimate Enabled".</text>
+  </g>
+  <g transform="translate(800,760)">
+    <rect stroke="#b8c4d0" stroke-width="1.5" width="370" height="200" rx="8" fill="#fff6f0" stroke="#e0a070"/>
+    <text x="16" y="28" font-size="15" font-weight="600" fill="#a33b00">Check before clamping</text>
+    <text x="16" y="54" font-size="14" fill="#1b2733">CT unclamped → Bias ≈ 1.6 V,</text>
+    <text x="16" y="74" font-size="14" fill="#1b2733">  RMS a few mV, Clipped = 0</text>
+    <text x="16" y="100" font-size="14" fill="#1b2733">Clamp ONE wire (live only)</text>
+    <text x="16" y="126" font-size="14" fill="#1b2733">If Min/Max hit 0 / 4095 or</text>
+    <text x="16" y="146" font-size="14" fill="#1b2733">  Clipped &gt; 0 → unclamp at once</text>
+    <text x="16" y="172" font-size="12.5" fill="#3d4b59">Never leave a 100 A CT with no burden.</text>
+    <text x="16" y="190" font-size="12.5" fill="#3d4b59">No 230 V wiring on the breadboard.</text>
+  </g>
+</svg>
