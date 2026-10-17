@@ -17,3 +17,7 @@ hardware/kicad/*.rpt
 hardware/logs/
 freerouting.json
 *.jar
+hardware/kicad_v02/*-backups/
+hardware/kicad_v02/*.lck
+hardware/kicad_v02/*.rpt
+hardware/kicad_v02/fp-info-cache

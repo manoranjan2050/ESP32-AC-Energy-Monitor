@@ -18,7 +18,9 @@ import os
 import re
 import uuid
 
-KICAD = "C:/Program Files/KiCad/10.0/share/kicad"
+KICAD = next((p for p in ("C:/Program Files/KiCad/10.0/share/kicad",
+                          os.path.expandvars("%LOCALAPPDATA%/Programs/KiCad/10.0/share/kicad"))
+              if os.path.isdir(p)), "C:/Program Files/KiCad/10.0/share/kicad")
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "kicad")
 NAME = "ct6-energy-monitor"

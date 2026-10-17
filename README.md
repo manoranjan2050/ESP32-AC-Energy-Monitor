@@ -90,6 +90,19 @@ EasyEDA build guide for **v0.2**: 97 parts and 51 nets, every pin with its net n
 - **ZMPT101B backup:** **J8** takes the plug-in module, and jumper **JP2** selects what feeds GPIO9 (1-2 = on-board stage, 2-3 = module).
 - **Unchanged:** the CT channels, bias, on-board voltage stage and GPIO map.
 
+**v0.2 KiCad schematic** (schematic only; you lay out the v0.2 PCB in EasyEDA):
+- [`hardware/kicad_v02/ct6-energy-monitor-v02.kicad_pro`](hardware/kicad_v02/ct6-energy-monitor-v02.kicad_pro): open in KiCad 10
+- [`hardware/renders/schematic_v02.pdf`](hardware/renders/schematic_v02.pdf): PDF view
+- [`hardware/fab/ct6-v02-kicad-schematic.zip`](hardware/fab/ct6-v02-kicad-schematic.zip): zipped project; try *EasyEDA Pro → File → Import → KiCad*
+- [`hardware/kicad_v02/ct6-v02-bom.csv`](hardware/kicad_v02/ct6-v02-bom.csv): BOM
+
+**Checks passed:**
+- KiCad ERC: **0 electrical errors**
+- **All 242 pin connections / 51 nets match** `hardware/netlist_v02.py`, which also generates the EasyEDA guide, so both always agree
+- The module pinout was checked against KiCad's official ESP32-S3-WROOM-1 symbol
+
+Regenerate with `python hardware/generate_kicad_v02.py`.
+
 ### Ordering (JLCPCB)
 
 | File | Use |

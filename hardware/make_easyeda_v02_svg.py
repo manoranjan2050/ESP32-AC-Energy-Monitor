@@ -15,72 +15,11 @@ from xml.sax.saxutils import escape
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import generate_kicad as g  # noqa: E402  (only builds the v0.1 parts list on import)
 
 OUT = os.path.join(HERE, "renders", "easyeda_v02_wroom1u_guide.svg")
 
-# ------------------------------------------------------------------ v0.2 netlist
-parts = [copy.deepcopy(p) for p in g.parts if p["ref"] not in ("J3", "J4", "J2")]
-P = {p["ref"]: p for p in parts}
-P["R48"]["pins"]["2"] = "V_ONB"            # on-board stage now goes to JP2, not straight to GPIO9
-
-
-def add(ref, value, fp, pins, mpn="", lib_id=""):
-    p = dict(ref=ref, value=value, fp=fp, pins=pins, mpn=mpn, lib_id=lib_id or ref)
-    parts.append(p)
-    P[ref] = p
-
-
-# USB-C with data (native USB on GPIO19/20) + ESD
-add("J2", "USB-C 16P (data)", "Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12",
-    {"A4": "VIN_RAW", "B4": "VIN_RAW", "A9": "VIN_RAW", "B9": "VIN_RAW",
-     "A1": "GND", "B1": "GND", "A12": "GND", "B12": "GND", "SH": "GND",
-     "A5": "CC1", "B5": "CC2", "A6": "USB_DP", "B6": "USB_DP", "A7": "USB_DN", "B7": "USB_DN",
-     "A8": None, "B8": None}, "HRO TYPE-C-31-M-12 (LCSC C165948)")
-add("U4", "USBLC6-2SC6", "Package_TO_SOT_SMD:SOT-23-6",
-    {"1": "USB_DP", "6": "USB_DP", "3": "USB_DN", "4": "USB_DN", "5": "VIN_RAW", "2": "GND"},
-    "USB ESD (LCSC C7519)")
-# 3.3 V regulator (the module needs its own 3V3; DevKit used to provide it)
-add("U3", "AMS1117-3.3", "Package_TO_SOT_SMD:SOT-223-3_TabPin2",
-    {"3": "+5V", "2": "+3V3", "1": "GND"}, "LDO 1 A (LCSC C6186), tab = pin 2 = OUT")
-add("C50", "10uF", "Capacitor_SMD:C_0805_2012Metric", {"1": "+5V", "2": "GND"}, "LDO input")
-add("C51", "22uF", "Capacitor_SMD:C_1206_3216Metric", {"1": "+3V3", "2": "GND"}, "LDO output")
-# ESP32-S3 module
-MOD_PINS = [  # (pin, name, net)
-    ("1", "GND", "GND"), ("2", "3V3", "+3V3"), ("3", "EN", "EN"), ("4", "IO4", "CT2_ADC"),
-    ("5", "IO5", "CT3_ADC"), ("6", "IO6", "CT4_ADC"), ("7", "IO7", "CT5_ADC"), ("8", "IO15", None),
-    ("9", "IO16", None), ("10", "IO17", "I2C_SDA"), ("11", "IO18", "I2C_SCL"), ("12", "IO8", "CT6_ADC"),
-    ("13", "IO19", "USB_DN"), ("14", "IO20", "USB_DP"), ("15", "IO3", None), ("16", "IO46", None),
-    ("17", "IO9", "V_ADC"), ("18", "IO10", "VB_MON"), ("19", "IO11", None), ("20", "IO12", None),
-    ("21", "IO13", None), ("22", "IO14", None), ("23", "IO21", None), ("24", "IO47", None),
-    ("25", "IO48", None), ("26", "IO45", None), ("27", "IO0", "IO0_BOOT"), ("28", "IO35", None),
-    ("29", "IO36", None), ("30", "IO37", None), ("31", "IO38", None), ("32", "IO39", None),
-    ("33", "IO40", None), ("34", "IO41", None), ("35", "IO42", None), ("36", "RXD0", "U0RXD"),
-    ("37", "TXD0", "U0TXD"), ("38", "IO2", None), ("39", "IO1", "CT1_ADC"), ("40", "GND", "GND"),
-    ("41", "EPAD", "GND"),
-]
-add("U2", "ESP32-S3-WROOM-1U-N16R8", "RF_Module:ESP32-S3-WROOM-1U",
-    {p: n for p, _, n in MOD_PINS}, "LCSC C3013946, U.FL antenna")
-add("C52", "10uF", "Capacitor_SMD:C_0805_2012Metric", {"1": "+3V3", "2": "GND"}, "at module pin 2")
-add("C53", "100nF", "Capacitor_SMD:C_0805_2012Metric", {"1": "+3V3", "2": "GND"}, "at module pin 2")
-add("R50", "10k", "Resistor_SMD:R_0805_2012Metric", {"1": "+3V3", "2": "EN"}, "EN pull-up")
-add("C54", "1uF", "Capacitor_SMD:C_0805_2012Metric", {"1": "EN", "2": "GND"}, "EN delay")
-add("SW1", "RESET", "Button_Switch_SMD:SW_SPST_TL3342", {"1": "EN", "2": "EN", "3": "GND", "4": "GND"},
-    "tactile 5.1x5.1 (LCSC C318884)")
-add("R51", "10k", "Resistor_SMD:R_0805_2012Metric", {"1": "+3V3", "2": "IO0_BOOT"}, "IO0 pull-up")
-add("SW2", "BOOT", "Button_Switch_SMD:SW_SPST_TL3342", {"1": "IO0_BOOT", "2": "IO0_BOOT", "3": "GND", "4": "GND"},
-    "tactile 5.1x5.1 (LCSC C318884)")
-add("J7", "UART debug", "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical",
-    {"1": "U0TXD", "2": "U0RXD", "3": "GND"}, "optional recovery header")
-# ZMPT101B plug-in module backup + source selector
-add("J8", "ZMPT101B module", "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical",
-    {"1": "+5V", "2": "ZM_OUT", "3": "GND"}, "blue module: VCC / OUT / GND")
-add("R52", "10k 1%", "Resistor_SMD:R_0805_2012Metric", {"1": "ZM_OUT", "2": "V_MOD"}, "module divider top")
-add("R53", "22k 1%", "Resistor_SMD:R_0805_2012Metric", {"1": "V_MOD", "2": "GND"}, "module divider bottom")
-add("C55", "10nF", "Capacitor_SMD:C_0805_2012Metric", {"1": "V_MOD", "2": "GND"}, "103")
-add("JP2", "V source", "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical",
-    {"1": "V_ONB", "2": "V_ADC", "3": "V_MOD"}, "1-2 on-board ZMPT · 2-3 plug-in module")
-# J6 OLED now powered from the LDO 3V3 (same net name +3V3)
+# ------------------------------------------------------------------ v0.2 netlist (shared with the KiCad schematic)
+from netlist_v02 import MOD_PINS, P, parts  # noqa: E402
 
 PIN_NAMES = {
     "U1": {"1": "OUT A", "2": "−IN A", "3": "+IN A", "4": "V− (GND)", "5": "+IN B", "6": "−IN B", "7": "OUT B", "8": "V+"},
@@ -98,7 +37,7 @@ PIN_NAMES = {
     "J6": {"1": "GND", "2": "VCC", "3": "SCL", "4": "SDA"},
     "J1": {"1": "+5V in", "2": "GND"}, "J5": {"1": "L (live)", "2": "N (neutral)"},
     "J7": {"1": "TX (out)", "2": "RX (in)", "3": "GND"}, "J8": {"1": "VCC", "2": "OUT", "3": "GND"},
-    "SW1": {"1": "", "2": "", "3": "", "4": ""}, "SW2": {"1": "", "2": "", "3": "", "4": ""},
+    "SW1": {"1": "EN side", "2": "GND side"}, "SW2": {"1": "IO0 side", "2": "GND side"},
 }
 
 
@@ -235,7 +174,7 @@ text(46, y + 26, "What changed from v0.1 (DevKit) → v0.2 (module on board)", 1
 for k, ln in enumerate([
     "• REMOVED: DevKit sockets J3/J4 and the power-only USB-C.   • ADDED: U2 ESP32-S3-WROOM-1U-N16R8 (U.FL → external 2.4 GHz IPEX antenna, better from inside a metal DB box).",
     "• ADDED: U3 AMS1117-3.3 regulator (+5V → +3V3), J2 USB-C 16P WITH data (D+ → IO20, D− → IO19, native USB for flashing/logs), U4 USBLC6-2SC6 ESD.",
-    "• ADDED: EN reset (R50 10k + C54 1µF + SW1 RESET), BOOT (R51 10k + SW2 on IO0), J7 UART header, module decoupling C52/C53 next to module pin 2.",
+    "• ADDED: EN reset (R50 10k + C54 1µF + SW1 RESET), BOOT (R51 10k + SW2 on IO0), J7 UART header, module decoupling C52/C53 next to module pin 2. KiCad schematic: hardware/kicad_v02/.",
     "• ADDED: J8 ZMPT101B module header (+5V/OUT/GND) → R52 10k / R53 22k / C55 10nF → V_MOD, and JP2 selects GPIO9 source: 1-2 on-board stage, 2-3 module.",
     "• Unchanged GPIO map: CT1 IO1 · CT2-CT5 IO4-IO7 · CT6 IO8 · Voltage IO9 · Bias monitor IO10 · OLED SDA IO17 / SCL IO18.",
 ]):
@@ -257,7 +196,7 @@ y += 50
 text(30, y, "1 · U2 ESP32-S3-WROOM-1U-N16R8 (LCSC C3013946): all 41 pins", 20, "#1b2733", "700")
 y += 12
 text(30, y + 12, "Connect by PIN NAME (IO1, IO4 …) as shown on the LCSC/EasyEDA symbol; pin numbers are per the WROOM-1/1U "
-                 "datasheet, so cross-check them on the symbol. Pin 41 = big bottom GND pad (solder it).", 13, "#8a4b00", italic=True)
+                 "datasheet and match KiCad 10's official ESP32-S3-WROOM-1 symbol. Pin 41 = big bottom GND pad (solder it).", 13, "#8a4b00", italic=True)
 y += 30
 cols, per = 3, 14
 colw = (W - 60) / cols
@@ -268,7 +207,7 @@ for k, (pin, nm, net) in enumerate(MOD_PINS):
     yy = y + 14 + r * 22
     text(x, yy, f"pin {pin}", 12, "#3d4b59", "600")
     text(x + 58, yy, nm, 12.5, "#1b2733", "700")
-    tag(x + 120, yy, 200, net)
+    tag(x + 175, yy, 180, net)
 y += per * 22 + 50
 
 y = section(y, "2 · Power: 5 V in (screw terminal or USB-C) → +5V → AMS1117 → +3V3 → FB1 → +3V3A",
@@ -278,7 +217,7 @@ y = section(y, "2 · Power: 5 V in (screw terminal or USB-C) → +5V → AMS1117
 y = section(y, "3 · Module support: decoupling, EN/RESET, BOOT, UART header, OLED",
             ["C52", "C53", "R50", "C54", "SW1", "R51", "SW2", "J7", "J6"],
             "C52 + C53 as close as possible to module pin 2 (3V3). Flash: hold BOOT, tap RESET, release BOOT (first time only).\n"
-            "J7: connect a USB-UART with TX↔RX crossed if native USB ever fails. Tactile switches: pins 1-2 and 3-4 are internally joined.")
+            "J7: connect a USB-UART with TX↔RX crossed if native USB ever fails. 4-pin tactile switches: the two pins on each side are joined.")
 y = section(y, "4 · Bias VB ≈ 1.50 V (MCP6002 unit A) + op-amp decoupling (unchanged)",
             ["R3", "R4", "C4", "U1", "C5", "R5", "C6", "C7", "R6"],
             "U1 = one MCP6002: unit A (pins 1-2-3) bias buffer, unit B (pins 5-6-7) on-board voltage amplifier.")
